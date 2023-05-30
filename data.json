@@ -1,0 +1,34 @@
+{
+  "Mood / Memory": {
+    "5HT2A": {
+      "Relevant Genotype(s)": "hetero|homo",
+      "Significance": "Low Serotonin production-higher stress perception, IBS, depression and compromised episodic memory.",
+      "Include": {
+        "Lifestyle": "Moderate intensity aerobic exercise|Meditation",
+        "Nutrition": "Green or black tea",
+        "Supplements": "Tryptophan, prebiotics, probiotics, Ginkgo biloba, B2, B6, B12, and folate"
+      },
+      "Avoid": "Minimize chronic stress|poor gut flora|high-dose lithium|cannabis use|excessive smartphone use"
+    },
+    "FUT2": {
+      "Relevant Genotype(s)": "homo",
+      "Significance": "Lower Gaba production: sleep / calm hormone",
+      "Include": {
+        "Lifestyle": "Running and biking >30 minutes|Strenuous hiking at high altitude",
+        "Nutrition": "Kaempfero: green leafy vegetables, including spinach and kale, and herbs such as dill, chives, and tarragon|Cacao|Genistein: Soy milk, soy flour, soy protein isolates, textured soy protein, Tempe|Echinacea tea|7-hydroxyflavone (parsley, onions, berries, tea, and citrus fruits)|Beta-caryophyllene (cloves, rosemary, hops)",
+        "Supplements": ""
+      },
+      "Avoid": "Pesticides|CBD oil|Phthalates"
+    },
+    "BDNF": {
+      "Relevant Genotype(s)": "hetero|homo",
+      "Significance": "Compromises neuroplasticity & cognitive function",
+      "Include": {
+        "Lifestyle": "Running|Sauna",
+        "Nutrition": "Diet with low saturated fat|DHA|Green tea",
+        "Supplements": "Lithium|Acetylcholine|Bifidobacterium longum"
+      },
+      "Avoid": "Chronic stress"
+    }
+  }
+}

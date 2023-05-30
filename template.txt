@@ -1,0 +1,13 @@
+Template
+{
+"": {
+    "Relevant Genotype(s)": "",
+    "Significance": "",
+    "Include": {
+      "Lifestyle": "",
+      "Nutrition": "",
+      "Supplements": ""
+    },
+    "Avoid": ""
+  }
+}
