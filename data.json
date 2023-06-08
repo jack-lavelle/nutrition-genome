@@ -1,34 +1,379 @@
 {
   "Mood / Memory": {
     "5HT2A": {
-      "Relevant Genotype(s)": "hetero|homo",
+      "Relevant Genotype(s)": ["hetero", "homo"],
       "Significance": "Low Serotonin production-higher stress perception, IBS, depression and compromised episodic memory.",
       "Include": {
-        "Lifestyle": "Moderate intensity aerobic exercise|Meditation",
-        "Nutrition": "Green or black tea",
-        "Supplements": "Tryptophan, prebiotics, probiotics, Ginkgo biloba, B2, B6, B12, and folate"
+        "Lifestyle": ["Moderate intensity aerobic exercise", "Meditation"],
+        "Nutrition": ["Green", "black tea"],
+        "Supplements": [
+          "Tryptophan",
+          "prebiotics",
+          "probiotics",
+          "Ginkgo biloba",
+          "B2",
+          "B6",
+          "B12",
+          "folate"
+        ]
       },
-      "Avoid": "Minimize chronic stress|poor gut flora|high-dose lithium|cannabis use|excessive smartphone use"
+      "Avoid": [
+        "Minimize chronic stress",
+        "poor gut flora",
+        "high-dose lithium",
+        "cannabis use",
+        "excessive smartphone use"
+      ]
     },
     "FUT2": {
-      "Relevant Genotype(s)": "homo",
+      "Relevant Genotype(s)": ["homo"],
       "Significance": "Lower Gaba production: sleep / calm hormone",
       "Include": {
-        "Lifestyle": "Running and biking >30 minutes|Strenuous hiking at high altitude",
-        "Nutrition": "Kaempfero: green leafy vegetables, including spinach and kale, and herbs such as dill, chives, and tarragon|Cacao|Genistein: Soy milk, soy flour, soy protein isolates, textured soy protein, Tempe|Echinacea tea|7-hydroxyflavone (parsley, onions, berries, tea, and citrus fruits)|Beta-caryophyllene (cloves, rosemary, hops)",
-        "Supplements": ""
+        "Lifestyle": [
+          "Running and biking > 30 minutes",
+          "Strenuous hiking at high altitude"
+        ],
+        "Nutrition": [
+          "Kaempfero: green leafy vegetables, including spinach and kale, and herbs such as dill, chives, and tarragon",
+          "Cacao",
+          "Genistein: Soy milk, soy flour, soy protein isolates, textured soy protein, Tempe",
+          "Echinacea tea",
+          "7-hydroxyflavone (parsley, onions, berries, tea, and citrus fruits)",
+          "Beta-caryophyllene (cloves, rosemary, hops)"
+        ],
+        "Supplements": []
       },
-      "Avoid": "Pesticides|CBD oil|Phthalates"
+      "Avoid": ["Pesticides", "CBD oil", "Phthalates"]
     },
     "BDNF": {
-      "Relevant Genotype(s)": "hetero|homo",
+      "Relevant Genotype(s)": ["hetero", "homo"],
       "Significance": "Compromises neuroplasticity & cognitive function",
       "Include": {
-        "Lifestyle": "Running|Sauna",
-        "Nutrition": "Diet with low saturated fat|DHA|Green tea",
-        "Supplements": "Lithium|Acetylcholine|Bifidobacterium longum"
+        "Lifestyle": ["Running", "Sauna"],
+        "Nutrition": ["Diet with low saturated fat", "DHA", "Green tea"],
+        "Supplements": ["Lithium", "Acetylcholine", "Bifidobacterium longum"]
       },
-      "Avoid": "Chronic stress"
+      "Avoid": ["Chronic stress"]
+    }
+  },
+  "Brain Health": {
+    "FAAH": {
+      "Relevant Genotype(s)": ["wild"],
+      "Significance": "Lower cannabinoid levels: Higher anxiety and stress perception. Less 'blissful'",
+      "Include": {
+        "Lifestyle": [
+          "Running and biking > 30 minutes",
+          "Strenuous hiking at high altitude",
+          "Meditation, Yoga and deep breathing"
+        ],
+        "Nutrition": [
+          "Red clover tea (women)",
+          "Kaempfero: green leafy vegetables, including spinach and kale, and herbs such as dill, chives, and tarragon",
+          "Cacao",
+          "Genistein: Soy milk, soy flour, soy protein isolates, textured soy protein, Tempe",
+          "Echinacea tea",
+          "7-hydroxyflavone (parsley, onions, berries, tea, and citrus fruits)",
+          "Beta-caryophyllene (cloves, rosemary, hops)"
+        ],
+        "Supplements": []
+      },
+      "Avoid": ["Pesticides", "CBD oil", "Phthalates"]
+    }
+  },
+  "Heart Health": {
+    "9P21": {
+      "Relevant Genotype(s)": [],
+      "Significance": "Higher incidence of heart disease and heart attacks",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": ["Increase intake of fruit and vegetables"],
+        "Supplements": []
+      },
+      "Avoid": []
+    },
+    "ACE1": {
+      "Relevant Genotype(s)": ["wild"],
+      "Significance": "Blood pressure dysregulation due to poor saturated fat processing",
+      "Include": {
+        "Lifestyle": [
+          "Total fat intake below 37%",
+          "Limiting saturated fat to 22g per day"
+        ],
+        "Nutrition": [],
+        "Supplements": [
+          "Potassium",
+          "Vitamin D",
+          "Resveratrol",
+          "Curcumin",
+          "bilberry",
+          "grapes",
+          "allicin (raw garlic)",
+          "cinnamon",
+          "jasmine"
+        ]
+      },
+      "Avoid": ["Minimize high saturated fat diet over 37% of total calories"]
+    },
+    "ACE2": {
+      "Relevant Genotype(s)": ["homo"],
+      "Significance": "Blood pressure dysregulation due to poor saturated fat processing",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": [],
+        "Supplements": ["Potassium", "Vitamin D", "Resveratrol", "Curcumin"]
+      },
+      "Avoid": [
+        "Minimize smoking and a high saturated fat diet of over 50% of total calories"
+      ]
+    },
+    "CYP2R1": {
+      "Relevant Genotype(s)": [],
+      "Significance": "Higher need for optimal vitamin D levels for heart disease prevention",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": ["Vit D levels between 60-80"],
+        "Supplements": []
+      },
+      "Avoid": []
+    }
+  },
+  "Stress Response": {
+    "ADRB2": {
+      "Relevant Genotype(s)": [],
+      "Significance": "Increased adrenaline production, elevated stress response, and associated with IBS, anxiety, and chest pains",
+      "Include": {
+        "Lifestyle": [
+          "Deep breathing methods(box breathing)",
+          "Stress reduction techniques(Meditation, Brain Spa by OWM, and Yoga)"
+        ],
+        "Nutrition": [],
+        "Supplements": [
+          "Adaptogens (Ashwagandha, Cordyceps, and Reishi)",
+          "Magnesium",
+          "Vitamin C"
+        ]
+      },
+      "Avoid": []
+    },
+    "COMT FAST": {
+      "Relevant Genotype(s)": [],
+      "Significance": "Fast metabolizer of estrogen, dopamine and adrenaline. Better response to high pressure situations with the ability to be more emotionally resistant and calm in a crisis. Thrive in response to certain stressors with enhanced cognitive performance due to elevation of dopamine and adrenaline. Perform well on tasks demanding cognitive flexibility, but not demanding focused attention. Lower dopamine can affect executive function and problem-solving abilities",
+      "Include": {
+        "Lifestyle": [
+          "High-intensity exercise, low media exposure",
+          "Meditation",
+          "Balanced Blood Sugar"
+        ],
+        "Nutrition": [
+          "Increasing catecholamine intake: Coffee, black tea, green tea, red wine, chocolate, citrus, bananas, berries, vanilla -> slow down enzyme",
+          "Fiber"
+        ],
+        "Supplements": ["Vit D", "Omega-3-Fatty Acid"]
+      },
+      "Avoid": []
+    }
+  },
+  "Tissue / Genetic Repair": {
+    "COL1A1": {
+      "Relevant Genotype(s)": ["wild"],
+      "Significance": "Slower collagen repair / turn over. Poor processing capacity of betablockers, antidepressants and opioids. Lower Vo2Max (tissue oxygenation)",
+      "Include": {
+        "Lifestyle": ["Cryotherapy"],
+        "Nutrition": [],
+        "Supplements": [
+          "Vitamin C",
+          "B6",
+          "Zinc",
+          "CopperGlycine",
+          "proline",
+          "lysine",
+          "ashwagandha",
+          "Eluethero root"
+        ]
+      },
+      "Avoid": []
+    }
+  },
+  "General Inflammation": {
+    "CAT": {
+      "Relevant Genotype(s)": ["hetero", "homo"],
+      "Significance": "Poor processing of oxidative stress( cellular inflammation)  from environmental toxins, plastics, etc.",
+      "Include": {
+        "Lifestyle": [
+          "Deep breathing relaxation techniques (yoga, meditation, prayer) -> assist catalase",
+          "Monitor iron levels"
+        ],
+        "Nutrition": [
+          "Higher need for flavonoids, selenium, ginger, cumin, anise, fennel, caraway, cardamom",
+          "Boron, lutein, holy basil"
+        ],
+        "Supplements": ["Lion’s Mane mushroom"]
+      },
+      "Avoid": ["Oxidative stress", "BPA plastic"]
+    },
+    "CTH": {
+      "Relevant Genotype(s)": ["homo"],
+      "Significance": "Poor Glutathione production- lower antioxidant capacity- higher need for precursor Cysteine.",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": [
+          "Animal foods (because they’re high in cysteine)( lean cuts only due to poor saturated fat processing)"
+        ],
+        "Supplements": [
+          "Lutein",
+          "Zeaxanthin",
+          "Bilberry",
+          "Lingonberry",
+          "Vitamin C",
+          "Vitamin E",
+          "DHA",
+          "Zinc"
+        ]
+      },
+      "Avoid": []
+    },
+    "MTHFR 1298": {
+      "Relevant Genotype(s)": ["homo"],
+      "Significance": "Higher need for folate for healthier Nitric Oxide production( inflammation reduction, blood pressure control, brain function, and cancer protection)",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": [],
+        "Supplements": [
+          "Methyl folate",
+          "Vit C",
+          "Selenium",
+          "Mg",
+          "B6",
+          "L-arginine ",
+          "BH4 supplement Mood Assist from OWM"
+        ]
+      },
+      "Avoid": []
+    },
+    "MTHFR 667": {
+      "Relevant Genotype(s)": ["homo", "hetero"],
+      "Significance": "Higher need for folate for healthier Nitric Oxide production( inflammation reduction, blood pressure control, brain function, and cancer protection)",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": [],
+        "Supplements": [
+          "Methyl folate",
+          "Vit C",
+          "Selenium",
+          "Mg",
+          "B6",
+          "L-arginine ",
+          "BH4 supplement Mood Assist from OWM"
+        ]
+      },
+      "Avoid": []
+    },
+    "Inflammation and Cancer": {
+      "CYP2E1": {
+        "Relevant Genotype(s)": ["hetero", "homo"],
+        "Significance": "Higher association with colon cancer",
+        "Include": {
+          "Lifestyle": [],
+          "Nutrition": [
+            "Garlic",
+            "Watercress",
+            "Ellagic acid",
+            "Dandelion",
+            "Green tea"
+          ],
+          "Supplements": ["Vitamin C", "N-acetyl cysteine", "MCT oil"]
+        },
+        "Avoid": ["Minimize benzene", "sodium benzoate", "fried foods"]
+      },
+      "CYP2R1": {
+        "Relevant Genotype(s)": ["hetero", "homo"],
+        "Significance": "Higher need for Vitamin D as protection against prostate cancer (men)",
+        "Include": {
+          "Lifestyle": ["Keep D levels between 60-80"],
+          "Nutrition": [],
+          "Supplements": ["Vitamin D"]
+        },
+        "Avoid": []
+      },
+      "ESR2": {
+        "Relevant Genotype(s)": ["hetero", "homo"],
+        "Significance": "Higher sensitivity to estrogen-higher risk of prostate cancer (men)",
+        "Include": {
+          "Lifestyle": [],
+          "Nutrition": [
+            "Apigenin (e.g., celery, parsley)",
+            "phytoestrogens (berries, beans, and sourdough bread)"
+          ],
+          "Supplements": []
+        },
+        "Avoid": [
+          "Minimize obesity, BPA, plastic, atrazine, dioxins, phthalates"
+        ]
+      },
+      "GATA3": {
+        "Relevant Genotype(s)": ["hetero", "homo"],
+        "Significance": "Associated with lower first line of defense immune T cell production and tumor suppressor gene. Related to colon cancer for those eating processed meat compared to those with a normal genotype",
+        "Include": {
+          "Lifestyle": [],
+          "Nutrition": [],
+          "Supplements": []
+        },
+        "Avoid": ["Processed meat"]
+      },
+      "TMPRSS2": {
+        "Relevant Genotype(s)": ["homo"],
+        "Significance": "Prostate cancer",
+        "Include": {
+          "Lifestyle": [],
+          "Nutrition": [
+            "Lycopene - red fruits and vegetables",
+            "Phytoestrogens: soy beans, tofu, tempeh, soy beverages, linseed (flax), sesame seeds, wheat, berries, oats, barley, dried beans, lentils, rice, alfalfa, mung beans, apples, carrots, wheat germ, ricebran, and soy linseed bread"
+          ],
+          "Supplements": ["Curcumin"]
+        },
+        "Avoid": ["Smoking"]
+      }
+    }
+  },
+  "Cholesterol / Glucose Management": {
+    "ACLSL1": {
+      "Relevant Genotype(s)": ["wild"],
+      "Significance": "",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": [
+          "Monosaturated or polyunsaturated fats to replace saturated fat"
+        ],
+        "Supplements": ["Fish oil", "Algae EPA/DHA"]
+      },
+      "Avoid": ["Fat intake of greater than 35% of total calories"]
+    },
+    "APOA2": {
+      "Relevant Genotype(s)": ["homo"],
+      "Significance": "increased cholesterol due to poor saturated fat processing",
+      "Include": {
+        "Lifestyle": ["Standing desks / constant movement -> stimulate LPL"],
+        "Nutrition": ["Less than 22g of saturated fat per day"],
+        "Supplements": []
+      },
+      "Avoid": [
+        "Minimize Saturated fat (mainly from dairy)",
+        "sedentary lifestyle"
+      ]
+    },
+    "MTNR18": {
+      "Relevant Genotype(s)": ["homo", "hetero"],
+      "Significance": "Glucose effected by meal timing through melatonin metabolism",
+      "Include": {
+        "Lifestyle": [
+          "Dinner before 7pm",
+          "No late night snacks",
+          "Breakfast after 7:30am"
+        ],
+        "Nutrition": [],
+        "Supplements": []
+      },
+      "Avoid": []
     }
   }
 }
