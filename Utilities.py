@@ -3,27 +3,30 @@ import json
 
 
 class Utilities:
-    def generate_genes(self, gene_master_data, section_title):
+    gene_master_data = {}
+
+    @staticmethod
+    def generate_genes(section_title: str) -> list:
         if not section_title:
             section_title = None
 
-        if not gene_master_data:
-            self.load_master_data()
+        if not Utilities.gene_master_data:
+            Utilities.load_master_data()
 
         genes_random_sample = []
         while len(genes_random_sample) == 0:
             genes_random_sample = random.sample(
-                sorted(gene_master_data[section_title]),
-                k=random.randint(0, len(gene_master_data[section_title])),
+                sorted(Utilities.gene_master_data[section_title]),
+                k=random.randint(0, len(Utilities.gene_master_data[section_title])),
             )
         return genes_random_sample
 
-    def load_master_data(self):
-        gene_master_data = {}
+    @staticmethod
+    def load_master_data() -> dict:
         with open("gene_master_data.json", "r") as file:
-            gene_master_data = json.load(file)
+            Utilities.gene_master_data = json.load(file)
 
-        return gene_master_data
+        return Utilities.gene_master_data
 
-    def gen_section_title(self):
+    def gen_section_title(self) -> str:
         return random.choice(sorted(self.load_master_data().keys()))
