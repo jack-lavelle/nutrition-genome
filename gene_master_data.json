@@ -267,72 +267,70 @@
         ]
       },
       "Avoid": []
+    }
+  },
+  "Inflammation and Cancer": {
+    "CYP2E1": {
+      "Relevant Genotype(s)": ["hetero", "homo"],
+      "Significance": "Higher association with colon cancer",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": [
+          "Garlic",
+          "Watercress",
+          "Ellagic acid",
+          "Dandelion",
+          "Green tea"
+        ],
+        "Supplements": ["Vitamin C", "N-acetyl cysteine", "MCT oil"]
+      },
+      "Avoid": ["Minimize benzene", "sodium benzoate", "fried foods"]
     },
-    "Inflammation and Cancer": {
-      "CYP2E1": {
-        "Relevant Genotype(s)": ["hetero", "homo"],
-        "Significance": "Higher association with colon cancer",
-        "Include": {
-          "Lifestyle": [],
-          "Nutrition": [
-            "Garlic",
-            "Watercress",
-            "Ellagic acid",
-            "Dandelion",
-            "Green tea"
-          ],
-          "Supplements": ["Vitamin C", "N-acetyl cysteine", "MCT oil"]
-        },
-        "Avoid": ["Minimize benzene", "sodium benzoate", "fried foods"]
+    "CYP2R1": {
+      "Relevant Genotype(s)": ["hetero", "homo"],
+      "Significance": "Higher need for Vitamin D as protection against prostate cancer (men)",
+      "Include": {
+        "Lifestyle": ["Keep D levels between 60-80"],
+        "Nutrition": [],
+        "Supplements": ["Vitamin D"]
       },
-      "CYP2R1": {
-        "Relevant Genotype(s)": ["hetero", "homo"],
-        "Significance": "Higher need for Vitamin D as protection against prostate cancer (men)",
-        "Include": {
-          "Lifestyle": ["Keep D levels between 60-80"],
-          "Nutrition": [],
-          "Supplements": ["Vitamin D"]
-        },
-        "Avoid": []
+      "Avoid": []
+    },
+    "ESR2": {
+      "Relevant Genotype(s)": ["hetero", "homo"],
+      "Significance": "Higher sensitivity to estrogen-higher risk of prostate cancer (men)",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": [
+          "Apigenin (e.g., celery, parsley)",
+          "phytoestrogens (berries, beans, and sourdough bread)"
+        ],
+        "Supplements": []
       },
-      "ESR2": {
-        "Relevant Genotype(s)": ["hetero", "homo"],
-        "Significance": "Higher sensitivity to estrogen-higher risk of prostate cancer (men)",
-        "Include": {
-          "Lifestyle": [],
-          "Nutrition": [
-            "Apigenin (e.g., celery, parsley)",
-            "phytoestrogens (berries, beans, and sourdough bread)"
-          ],
-          "Supplements": []
-        },
-        "Avoid": [
-          "Minimize obesity, BPA, plastic, atrazine, dioxins, phthalates"
-        ]
+      "Avoid": ["Minimize obesity, BPA, plastic, atrazine, dioxins, phthalates"]
+    },
+    "GATA3": {
+      "Relevant Genotype(s)": ["hetero", "homo"],
+      "Significance": "Associated with lower first line of defense immune T cell production and tumor suppressor gene. Related to colon cancer for those eating processed meat compared to those with a normal genotype",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": [],
+        "Supplements": []
       },
-      "GATA3": {
-        "Relevant Genotype(s)": ["hetero", "homo"],
-        "Significance": "Associated with lower first line of defense immune T cell production and tumor suppressor gene. Related to colon cancer for those eating processed meat compared to those with a normal genotype",
-        "Include": {
-          "Lifestyle": [],
-          "Nutrition": [],
-          "Supplements": []
-        },
-        "Avoid": ["Processed meat"]
+      "Avoid": ["Processed meat"]
+    },
+    "TMPRSS2": {
+      "Relevant Genotype(s)": ["homo"],
+      "Significance": "Prostate cancer",
+      "Include": {
+        "Lifestyle": [],
+        "Nutrition": [
+          "Lycopene - red fruits and vegetables",
+          "Phytoestrogens: soy beans, tofu, tempeh, soy beverages, linseed (flax), sesame seeds, wheat, berries, oats, barley, dried beans, lentils, rice, alfalfa, mung beans, apples, carrots, wheat germ, ricebran, and soy linseed bread"
+        ],
+        "Supplements": ["Curcumin"]
       },
-      "TMPRSS2": {
-        "Relevant Genotype(s)": ["homo"],
-        "Significance": "Prostate cancer",
-        "Include": {
-          "Lifestyle": [],
-          "Nutrition": [
-            "Lycopene - red fruits and vegetables",
-            "Phytoestrogens: soy beans, tofu, tempeh, soy beverages, linseed (flax), sesame seeds, wheat, berries, oats, barley, dried beans, lentils, rice, alfalfa, mung beans, apples, carrots, wheat germ, ricebran, and soy linseed bread"
-          ],
-          "Supplements": ["Curcumin"]
-        },
-        "Avoid": ["Smoking"]
-      }
+      "Avoid": ["Smoking"]
     }
   },
   "Cholesterol / Glucose Management": {

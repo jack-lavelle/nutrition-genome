@@ -29,24 +29,12 @@ def create_pdf():
     output_pdf = "output.pdf"
     doc = SimpleDocTemplate(output_pdf, pagesize=letter)
 
-    # Define paragraph styles
-    italic_underline_style = ParagraphStyle(
-        "italic_underline",
-        parent=styles["Normal"],
-        fontName="Times",
-        fontSize=12,
-        italic=True,
-        underline=True,
-    )
-
     # Define the content
     content = []
     content.append(Paragraph("Nutrition Genome", styles["Title"]))
-    add_section(content, Section("Brain Health", genes=None))
 
-    # add_section(
-    #    content, Section("Brain Health", Utilities.generate_genes("Brain Health"))
-    # )
+    # for section_title in person.section_titles:
+    #    add_section(content, Section(section_title, genes=None))
 
     # Add the image at the top-center of the first page
     image_path = "owm_resources/logo.png"  # Replace with the path to your PNG file
@@ -83,7 +71,7 @@ def create_bullet_pdf():
         l,
         bulletType="bullet",
         bulletColor="black",
-        bulletFontName="Helvetica",
+        bulletFontName="Times",
         bulletFontSize=12,
         bulletOffsetY=1,
         spaceBefore=5,
@@ -100,10 +88,43 @@ def create_bullet_pdf():
 
 def add_section(content: list, section: Section):
     content.append(Paragraph(section.section_title, styles["SectionTitle"]))
+    print(section.genes)
     for gene in section.genes:
         content.append(
-            Paragraph(section.content[gene]["Significance"], styles["SectionTitle"])
+            Paragraph(
+                section.content[gene]["Significance"] + ".", styles["Significance"]
+            )
         )
+        add_body(content, section, gene)
+
+
+def add_body(content, section, gene):
+    gene_content_dict = section.content[gene]["Include"]
+    for category in gene_content_dict:
+        if not section.content[gene]["Include"][category]:
+            pass
+        bullet_list = section.content[gene]["Include"][category]
+        add_bullet_list_to_content(content, bullet_list)
+
+
+def add_bullet_list_to_content(content, bullet_list):
+    for bullet in bullet_list:
+        l = []
+        l.append(ListItem(Paragraph(bullet), bulletColor=CMYKColor(0, 0, 0, 1)))
+
+        list_flowable = ListFlowable(
+            l,
+            bulletType="bullet",
+            bulletColor="black",
+            bulletFontName="Helvetica",
+            bulletFontSize=12,
+            bulletOffsetY=1,
+            spaceBefore=5,
+            spaceAfter=5,
+            leftIndent=7,
+        )
+
+        content.append(list_flowable)
 
 
 def createSection():

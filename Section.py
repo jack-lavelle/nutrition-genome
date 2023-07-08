@@ -5,7 +5,6 @@ from Utilities import Utilities
 class Section:
     gene_master_data = None
     section_title = None
-    gene_master_data = None
 
     # a Section corresponds to the data from a number of genes from a single category
     def __init__(self, section_title, genes):
