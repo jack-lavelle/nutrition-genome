@@ -4,6 +4,7 @@ import json
 
 class Utilities:
     gene_master_data = {}
+    all_genes = []
 
     @staticmethod
     def generate_genes(section_title: str) -> list:
@@ -28,5 +29,26 @@ class Utilities:
 
         return Utilities.gene_master_data
 
+    @staticmethod
+    def get_gene_master_data() -> dict:
+        if not Utilities.gene_master_data:
+            Utilities.load_master_data()
+
+        return Utilities.gene_master_data
+
     def gen_section_title(self) -> str:
         return random.choice(sorted(self.load_master_data().keys()))
+
+    @staticmethod
+    def get_all_genes():
+        if not Utilities.all_genes:
+            Utilities.all_genes = [
+                list(
+                    Utilities.get_gene_master_data()[
+                        list(Utilities.get_gene_master_data().keys())[i]
+                    ].keys()
+                )
+                for i in range(0, len(Utilities.get_gene_master_data().keys()))
+            ]
+
+        return Utilities.all_genes
