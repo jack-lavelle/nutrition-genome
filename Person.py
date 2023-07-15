@@ -1,14 +1,24 @@
-class Person:
-    def __init__(self, name) -> None:
-        self.name = name
-        self.gene_dict = {}
-        self.reportsDict = {}
+from Utilities import Utilities
 
-    def add_gene(self, gene, phenotype):
-        self.gene_dict[gene] = phenotype
+
+class Person:
+    name = None
+    reportsDict = {}
+
+    def __init__(self, name, gene_section_title=None) -> None:
+        self.genes = {}
+        self.name = name
+        if not gene_section_title:
+            gene_section_title = "Heart Health"
+
+        self.genes[gene_section_title] = Utilities.generate_genes(gene_section_title)
 
     def set_genes(self, genes):
-        self.gene_dict = genes
+        self.genes = genes
 
     def add_report(self, date):
         pass
+
+    def add_dict_genes(self, section_title):
+        genes = Utilities.generate_genes(section_title)
+        return genes
