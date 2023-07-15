@@ -18,6 +18,8 @@ class Section:
     def set_content(self, genes: list):
         if not self.genes:
             self.genes = Utilities.generate_genes(self.section_title)
+        else:
+            self.genes = genes
 
         for gene in self.genes:
             specific_gene_data = Utilities.gene_master_data[self.section_title][gene]
