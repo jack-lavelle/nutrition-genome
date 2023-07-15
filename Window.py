@@ -13,7 +13,7 @@ class Window:
 
         if not properties:
             window_width = 400
-            window_height = 300
+            window_height = 400
             screen_width = self.window.winfo_screenwidth()
             screen_height = self.window.winfo_screenheight()
             x_position = int((screen_width / 2) - (window_width / 2))
@@ -24,7 +24,7 @@ class Window:
             )
         else:
             window_width = 400
-            window_height = 300
+            window_height = 400
             screen_width = self.window.winfo_screenwidth()
             screen_height = self.window.winfo_screenheight()
             x_position = int((screen_width / 2) - (window_width / 2))
@@ -85,3 +85,18 @@ class Window:
         if not self.properties:
             return self.calculate_current_position()
         return self.properties
+
+    def resize_window(self):
+        self.window.geometry("")
+        self.window.update()
+
+        window_width = 400
+        window_height = self.window.winfo_height()
+        screen_width = self.window.winfo_screenwidth()
+        screen_height = self.window.winfo_screenheight()
+        x_position = int((screen_width / 2) - (window_width / 2))
+        y_position = int((screen_height / 2) - (window_height / 2))
+
+        self.window.geometry(
+            f"{window_width}x{window_height}+{x_position}+{y_position}"
+        )
