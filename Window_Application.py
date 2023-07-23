@@ -5,7 +5,6 @@ from PIL import Image, ImageTk
 from Window import Window
 from Person import Person
 from Utilities import Utilities
-from ToggledFrame import ToggledFrame
 
 people = []
 
