@@ -1,15 +1,26 @@
 import tkinter as tk
+from PIL import Image, ImageTk
 
 
 class Window:
     title = None
     window = None
     properties = None
-    persons = None
+    instances = {}
+    root = tk.Tk()
+    root.withdraw()
 
-    def __init__(self, title, properties=None) -> None:
-        self.window = tk.Tk()
+    @staticmethod
+    def get_instances():
+        return Window.instances
+
+    def __init__(self, title: str, properties: list = None) -> None:
+        self.window = tk.Toplevel(self.root, takefocus=True)
         self.window.title(title)
+
+        ico = Image.open("owm_resources\\logo_icon.png")
+        photo = ImageTk.PhotoImage(ico)
+        self.window.wm_iconphoto(False, photo)
 
         if not properties:
             window_width = 400
@@ -33,6 +44,8 @@ class Window:
             self.window.geometry(
                 f"{window_width}x{window_height}+{x_position}+{y_position}"
             )
+
+        Window.get_instances()[title] = self
 
     def set_geometry(self, properties=None):
         self.properties = self.get_current_properties()

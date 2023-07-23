@@ -1,16 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 from functools import partial
-from PIL import Image, ImageTk
 from Window import Window
 from Person import Person
 from Utilities import Utilities
-from ToggledFrame import ToggledFrame
 
 people = []
 
 
-# Screens: 1 - welcome: add new person, view current people
 def add_green_text(window: Window = None):
     label = tk.Label(window.window, text="")
     label.pack()
@@ -18,8 +15,8 @@ def add_green_text(window: Window = None):
     label.config(text=message, fg="green")
 
 
-def home_window(first_visit=True, window: Window = None):
-    root_window = Window("Welcome")
+def home_window(first_visit: bool = True, window: Window = None):
+    root_window = Window("Welcome", None)
     if not first_visit:
         message = "New patient successfully added."
         label = tk.Label(root_window.window, text=message, fg="green")
@@ -41,9 +38,6 @@ def home_window(first_visit=True, window: Window = None):
         command=partial(choose_genes_window, root_window),
     )
     screen1_button.pack()
-    # ico = Image.open("owm_resources\\logo_icon.png")
-    # photo = ImageTk.PhotoImage(ico)
-    # root_window.window.wm_iconphoto(False, photo)
     root_window.window.mainloop()
 
 
@@ -162,13 +156,12 @@ def get_selected_patient(window: Window, patient):
 
 
 def view_patients(window: Window, patients: list):
-    window_backup = window
     if not people:
         person1 = Person("Name 1", "Mood / Memory")
         person2 = Person("Name 2")
         people.extend([person1, person2])
 
-    second_window = Window("View Patients")
+    second_window = Window("View Patients", None)
     patient = create_dropdown_menu(second_window, "Brain Health", people)
 
     button = ttk.Button(
@@ -177,9 +170,7 @@ def view_patients(window: Window, patients: list):
         command=partial(get_selected_patient, second_window, patient),
     )
     button.pack(pady=10)
-
-    window.window.destroy()
-    second_window.window.mainloop()
+    window.window.mainloop()
 
 
 def create_dropdown_menu(window: Window, title: str, options: list):
