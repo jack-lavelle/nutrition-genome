@@ -24,7 +24,7 @@ selected_styles = {
 }
 
 
-def create_pdf():
+def create_pdf(person: Person):
     # Create a new PDF file
     output_pdf = "output.pdf"
     doc = SimpleDocTemplate(output_pdf, pagesize=letter)
@@ -32,9 +32,10 @@ def create_pdf():
     # Define the content
     content = []
     content.append(Paragraph("Nutrition Genome", styles["Title"]))
+    content.append(Paragraph(person.name, styles["SectionTitle"]))
 
-    # for section_title in person.section_titles:
-    #    add_section(content, Section(section_title, genes=None))
+    for section_title in list(Utilities.get_gene_master_data().keys()):
+        add_section(content, Section(section_title, genes=None))
 
     # Add the image at the top-center of the first page
     image_path = "owm_resources/logo.png"  # Replace with the path to your PNG file
@@ -167,5 +168,5 @@ def get_lorem_ipsum():
 
 
 if __name__ == "__main__":
-    create_pdf()
+    create_pdf(Person("Jack LaVelle"))
     # create_bullet_pdf()
