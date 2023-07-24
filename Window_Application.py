@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 from functools import partial
-from PIL import Image, ImageTk
 from Window import Window
 from Person import Person
 from Utilities import Utilities
@@ -17,15 +16,19 @@ def add_green_text(window: Window = None):
     label.config(text=message, fg="green")
 
 
-def home_window(first_visit=True, window: Window = None):
-    root_window = Window("Welcome")
-    if not first_visit:
+def home_window(
+    first_visit: bool = False, patient_added: bool = False, window: Window = None
+):
+    if first_visit:
+        root_window = Window("Welcome")
+    else:
+        window.window.destroy()
+        root_window = Window("Welcome")
+
+    if patient_added:
         message = "New patient successfully added."
         label = tk.Label(root_window.window, text=message, fg="green")
         label.pack()
-
-    if window:
-        window.window.destroy()
 
     screen2_button = ttk.Button(
         root_window.window,
@@ -40,9 +43,6 @@ def home_window(first_visit=True, window: Window = None):
         command=partial(choose_genes_window, root_window),
     )
     screen1_button.pack()
-    # ico = Image.open("owm_resources\\logo_icon.png")
-    # photo = ImageTk.PhotoImage(ico)
-    # root_window.window.wm_iconphoto(False, photo)
     root_window.window.mainloop()
 
 
@@ -59,16 +59,11 @@ def get_selected_items(window: Window = None, entry=None, selected_genes=None):
         print("Entered name:", name)
     print(name, selected_items)
 
-    home_window(False, window)
+    home_window(False, True, window)
 
 
 def choose_genes_window(window: Window = None):
-    # Close the first window
-    if window:
-        properties = window.get_current_properties()
-        window.window.destroy()
-
-    second_window = Window("Multi-Select Checkbox")
+    second_window = Window("Multi-Select Checkbox", None, window)
     entry = tk.Entry(second_window.window, fg="gray")
 
     def on_entry_click(event):
@@ -93,12 +88,12 @@ def choose_genes_window(window: Window = None):
     button = ttk.Button(
         second_window.window,
         text="Submit",
-        command=partial(get_selected_items, second_window, entry, total_checkboxes),
+        command=partial(get_selected_items, window, entry, total_checkboxes),
     )
     button.pack(pady=10)
 
     second_window.resize_window()
-    second_window.window.mainloop()
+    window.window.mainloop()
 
 
 def add_and_select_genes(current_selections, window, total_selections):
@@ -161,13 +156,13 @@ def get_selected_patient(window: Window, patient):
 
 
 def view_patients(window: Window, patients: list):
-    window_backup = window
     if not people:
-        person1 = Person("Name 1", "Mood / Memory")
-        person2 = Person("Name 2")
+        # Create random people
+        person1 = Person("George Washington", "Mood / Memory")
+        person2 = Person("Abraham Lincoln")
         people.extend([person1, person2])
 
-    second_window = Window("View Patients")
+    second_window = Window("View Patients", None, window)
     patient = create_dropdown_menu(second_window, "Brain Health", people)
 
     button = ttk.Button(
@@ -177,8 +172,7 @@ def view_patients(window: Window, patients: list):
     )
     button.pack(pady=10)
 
-    window.window.destroy()
-    second_window.window.mainloop()
+    window.window.mainloop()
 
 
 def create_dropdown_menu(window: Window, title: str, options: list):
@@ -195,4 +189,4 @@ def create_dropdown_menu(window: Window, title: str, options: list):
     return selected_option
 
 
-home_window()
+home_window(True)

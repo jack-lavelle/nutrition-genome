@@ -1,4 +1,5 @@
 import tkinter as tk
+from PIL import Image, ImageTk
 
 
 class Window:
@@ -7,9 +8,16 @@ class Window:
     properties = None
     persons = None
 
-    def __init__(self, title, properties=None) -> None:
-        self.window = tk.Tk()
+    def __init__(self, title, properties=None, root=None) -> None:
+        if root:
+            self.window = tk.Toplevel(root.window)
+        else:
+            self.window = tk.Tk()
+
         self.window.title(title)
+        ico = Image.open("owm_resources\\logo_icon.png")
+        photo = ImageTk.PhotoImage(ico)
+        self.window.wm_iconphoto(False, photo)
 
         if not properties:
             window_width = 400
