@@ -5,10 +5,10 @@ from Window import Window
 from Person import Person
 from Utilities import Utilities
 
-people = []
+patients = []
 
 
-# Screens: 1 - welcome: add new person, view current people
+# Screens: 1 - welcome: add new person, view current patients
 def add_green_text(window: Window = None):
     label = tk.Label(window.window, text="")
     label.pack()
@@ -33,7 +33,7 @@ def home_window(
     screen2_button = ttk.Button(
         root_window.window,
         text="View Patients",
-        command=partial(view_patients, root_window, people),
+        command=partial(view_patients, root_window),
     )
     screen2_button.pack()
 
@@ -63,7 +63,8 @@ def get_selected_items(window: Window = None, entry=None, selected_genes=None):
 
 
 def choose_genes_window(window: Window = None):
-    second_window = Window("Multi-Select Checkbox", None, window)
+    window.window.destroy()
+    second_window = Window("Multi-Select Checkbox")
     entry = tk.Entry(second_window.window, fg="gray")
 
     def on_entry_click(event):
@@ -88,12 +89,12 @@ def choose_genes_window(window: Window = None):
     button = ttk.Button(
         second_window.window,
         text="Submit",
-        command=partial(get_selected_items, window, entry, total_checkboxes),
+        command=partial(get_selected_items, second_window, entry, total_checkboxes),
     )
     button.pack(pady=10)
 
     second_window.resize_window()
-    window.window.mainloop()
+    second_window.window.mainloop()
 
 
 def add_and_select_genes(current_selections, window, total_selections):
@@ -155,15 +156,18 @@ def get_selected_patient(window: Window, patient):
     print(patient.get())
 
 
-def view_patients(window: Window, patients: list):
-    if not people:
-        # Create random people
+def view_patients(window: Window):
+    if not patients:
+        # Create random patients
         person1 = Person("George Washington", "Mood / Memory")
         person2 = Person("Abraham Lincoln")
-        people.extend([person1, person2])
+        patients.extend([person1, person2])
 
-    second_window = Window("View Patients", None, window)
-    patient = create_dropdown_menu(second_window, "Brain Health", people)
+    window.window.destroy()
+    second_window = Window("View Patients")
+    patient = create_dropdown_menu(
+        second_window, "Select Patient", [person.name for person in patients]
+    )
 
     button = ttk.Button(
         second_window.window,
@@ -172,7 +176,7 @@ def view_patients(window: Window, patients: list):
     )
     button.pack(pady=10)
 
-    window.window.mainloop()
+    second_window.window.mainloop()
 
 
 def create_dropdown_menu(window: Window, title: str, options: list):
