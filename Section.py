@@ -17,7 +17,7 @@ class Section:
 
     def set_content(self, genes: list):
         if not self.genes:
-            self.genes = Utilities.generate_genes(self.section_title)
+            self.genes = Utilities.generate_section_genes(self.section_title)
         else:
             self.genes = genes
 

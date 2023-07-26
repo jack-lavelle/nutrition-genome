@@ -7,7 +7,16 @@ class Utilities:
     all_genes = []
 
     @staticmethod
-    def generate_genes(section_title: str) -> list:
+    def generate_genes():
+        genes = {}
+
+        for gene_section in Utilities.load_master_data().keys():
+            genes[gene_section] = Utilities.generate_section_genes(gene_section)
+
+        return genes
+
+    @staticmethod
+    def generate_section_genes(section_title: str) -> list:
         if not section_title:
             section_title = None
 
@@ -36,8 +45,9 @@ class Utilities:
 
         return Utilities.gene_master_data
 
-    def gen_section_title(self) -> str:
-        return random.choice(sorted(self.load_master_data().keys()))
+    @staticmethod
+    def gen_section_title() -> str:
+        return random.choice(sorted(Utilities.load_master_data().keys()))
 
     @staticmethod
     def get_all_genes():
@@ -52,3 +62,8 @@ class Utilities:
             ]
 
         return Utilities.all_genes
+
+    @staticmethod
+    def load_patients():
+        # TODO
+        pass

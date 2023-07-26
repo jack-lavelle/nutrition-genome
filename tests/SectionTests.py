@@ -10,7 +10,7 @@ class Tests(unittest.TestCase):
         self.assertIsNotNone(section.genes)
 
     def test_gene_generation(self):
-        genes = Utilities.generate_genes("Heart Health")
+        genes = Utilities.generate_section_genes("Heart Health")
 
         self.assertIsNotNone(genes)
 
