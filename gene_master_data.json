@@ -7,14 +7,7 @@
         "Lifestyle": ["Moderate intensity aerobic exercise", "Meditation"],
         "Nutrition": ["Green", "black tea"],
         "Supplements": [
-          "Tryptophan",
-          "prebiotics",
-          "probiotics",
-          "Ginkgo biloba",
-          "B2",
-          "B6",
-          "B12",
-          "folate"
+          "Tryptophan, prebiotics, probiotics, Ginkgo biloba, B2, B6, B12, folate"
         ]
       },
       "Avoid": [
@@ -101,15 +94,7 @@
         ],
         "Nutrition": [],
         "Supplements": [
-          "Potassium",
-          "Vitamin D",
-          "Resveratrol",
-          "Curcumin",
-          "bilberry",
-          "grapes",
-          "allicin (raw garlic)",
-          "cinnamon",
-          "jasmine"
+          "Potassium, Vitamin D, Resveratrol, Curcumin, bilberry, grapes, allicin (raw garlic), cinnamon, jasmine"
         ]
       },
       "Avoid": ["Minimize high saturated fat diet over 37% of total calories"]
@@ -148,9 +133,7 @@
         ],
         "Nutrition": [],
         "Supplements": [
-          "Adaptogens (Ashwagandha, Cordyceps, and Reishi)",
-          "Magnesium",
-          "Vitamin C"
+          "Adaptogens (Ashwagandha, Cordyceps, Reishi), Magnesium, and Vitamin C"
         ]
       },
       "Avoid": []
