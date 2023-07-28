@@ -1,10 +1,17 @@
 import random
 import json
+import requests
+from json import JSONEncoder
+
+
+class MyEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
 
 
 class Utilities:
-    gene_master_data = {}
     all_genes = []
+    gene_master_data = {}
 
     @staticmethod
     def generate_genes():
@@ -51,8 +58,8 @@ class Utilities:
 
     @staticmethod
     def get_all_genes():
-        if not Utilities.all_genes:
-            Utilities.all_genes = [
+        if not all_genes:
+            all_genes = [
                 list(
                     Utilities.get_gene_master_data()[
                         list(Utilities.get_gene_master_data().keys())[i]
@@ -61,9 +68,4 @@ class Utilities:
                 for i in range(0, len(Utilities.get_gene_master_data().keys()))
             ]
 
-        return Utilities.all_genes
-
-    @staticmethod
-    def load_patients():
-        # TODO
-        pass
+        return all_genes
