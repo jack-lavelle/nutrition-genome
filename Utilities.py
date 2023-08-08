@@ -69,3 +69,13 @@ class Utilities:
             ]
 
         return all_genes
+
+    @staticmethod
+    def retrieve_patients():
+        json_key = {"key": "dyqIDK3amOB09U4PSmSDW5FaZiFMNyoCTlmQESTBzh8="}
+        response = requests.get(
+            "http://127.0.0.1:5000/read", json=json.dumps(json_key), timeout=30
+        )
+        patient_data = json.loads(response.json()["data"], cls=MyEncoder).pop("key")
+
+        return patient_data
