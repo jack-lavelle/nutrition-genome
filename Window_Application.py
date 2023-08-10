@@ -17,11 +17,10 @@ def add_green_text(window: Window = None):
 def home_window(
     first_visit: bool = False, patient_added: bool = False, window: Window = None
 ):
-    if first_visit:
-        root_window = Window("Welcome")
-    else:
+    if not first_visit:
         window.window.destroy()
-        root_window = Window("Welcome")
+
+    root_window = Window("Welcome")
 
     if patient_added:
         message = "New patient successfully added."
@@ -89,7 +88,14 @@ def choose_genes_window(window: Window = None):
         text="Submit",
         command=partial(get_selected_items, second_window, entry, total_checkboxes),
     )
-    button.pack(pady=10)
+    button.pack()
+
+    return_home_button = ttk.Button(
+        second_window.window,
+        text="Return To Home",
+        command=partial(return_home, second_window),
+    )
+    return_home_button.pack()
 
     second_window.resize_window()
     second_window.window.mainloop()
@@ -169,9 +175,20 @@ def view_patients(window: Window):
         text="Select Patient",
         command=partial(get_selected_patient, second_window, patient),
     )
-    button.pack(pady=10)
+    button.pack()
+
+    return_home_button = ttk.Button(
+        second_window.window,
+        text="Return To Home",
+        command=partial(return_home, second_window),
+    )
+    return_home_button.pack()
 
     second_window.window.mainloop()
+
+
+def return_home(original_window: Window):
+    home_window(False, False, original_window)
 
 
 def create_dropdown_menu(window: Window, title: str, options: list):
