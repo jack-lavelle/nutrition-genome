@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from functools import partial
 from Window import Window
-from Person import convert_json_data_to_patients
+from Person import Person, convert_json_data_to_patients
 import Utilities
 
 
@@ -44,7 +44,7 @@ def home_window(
     root_window.window.mainloop()
 
 
-def get_selected_items(window: Window = None, entry=None, selected_genes=None):
+def add_patient_action(window: Window = None, entry=None, selected_genes=None):
     # Close the first window
 
     selected_items = []
@@ -62,7 +62,7 @@ def get_selected_items(window: Window = None, entry=None, selected_genes=None):
 
 def choose_genes_window(window: Window = None):
     window.window.destroy()
-    second_window = Window("Multi-Select Checkbox")
+    second_window = Window("Add a New Patient")
     entry = tk.Entry(second_window.window, fg="gray")
 
     def on_entry_click(event):
@@ -82,12 +82,12 @@ def choose_genes_window(window: Window = None):
     entry.pack()
 
     total_checkboxes = {}
-    total_checkboxes = add_and_select_genes({}, second_window, total_checkboxes)
+    total_checkboxes = add_new_patient_window({}, second_window, total_checkboxes)
 
     button = ttk.Button(
         second_window.window,
-        text="Submit",
-        command=partial(get_selected_items, second_window, entry, total_checkboxes),
+        text="Add Patient",
+        command=partial(add_patient_action, second_window, entry, total_checkboxes),
     )
     button.pack()
 
@@ -103,7 +103,7 @@ def choose_genes_window(window: Window = None):
     second_window.window.mainloop()
 
 
-def add_and_select_genes(
+def add_new_patient_window(
     current_selections: dict, window: Window, total_selections: dict
 ):
     gene_master_data = Utilities.load_master_data()
@@ -155,7 +155,7 @@ def handle_button_click(name, window, checkboxes):
     button = ttk.Button(
         window.window,
         text="Submit Genes",
-        command=partial(get_selected_items, checkboxes),
+        command=partial(add_patient_action, checkboxes),
     )
     button.pack(pady=10)
     checkbox_results = [checkboxes.get(key).get() for key in checkboxes.keys()]
@@ -163,8 +163,14 @@ def handle_button_click(name, window, checkboxes):
     print(checkbox_results, name)
 
 
-def get_selected_patient(window: Window, patient):
-    print(patient.get())
+def get_selected_patient(window: Window, patient_name: str):
+    json_patient_data = Utilities.retrieve_json_patient_data()
+    patients = convert_json_data_to_patients(json_patient_data)
+    patients_dict = {}
+    for patient in patients:
+        patients_dict[patient.name] = patient
+
+    view_patient_window(window, patients_dict[patient_name.get()])
 
 
 def view_patients(window: Window):
@@ -191,6 +197,37 @@ def view_patients(window: Window):
     )
     return_home_button.pack()
 
+    second_window.window.focus_force()
+    second_window.window.mainloop()
+
+
+def view_patient_window(window: Window, patient: Person):
+    window.window.destroy()
+    second_window = Window("View Patient")
+    entry = tk.Entry(second_window.window, fg="black")
+
+    entry.insert(0, patient.name)
+    entry.config(fg="black")
+    entry.pack()
+
+    total_checkboxes = {}
+    total_checkboxes = add_new_patient_window({}, second_window, total_checkboxes)
+
+    button = ttk.Button(
+        second_window.window,
+        text="Update Patient",
+        command=partial(add_patient_action, second_window, entry, total_checkboxes),
+    )
+    button.pack()
+
+    return_home_button = ttk.Button(
+        second_window.window,
+        text="Return To Home",
+        command=partial(return_home, second_window),
+    )
+    return_home_button.pack()
+
+    second_window.resize_window()
     second_window.window.focus_force()
     second_window.window.mainloop()
 
