@@ -2,10 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 from functools import partial
 from Window import Window
-from Person import Person
-from Utilities import Utilities
-
-patients = []
+from Person import convert_json_data_to_patients
+import Utilities
 
 
 # Screens: 1 - welcome: add new person, view current patients
@@ -157,11 +155,8 @@ def get_selected_patient(window: Window, patient):
 
 
 def view_patients(window: Window):
-    if not patients:
-        # Create random patients
-        person1 = Person("George Washington", "Mood / Memory")
-        person2 = Person("Abraham Lincoln")
-        patients.extend([person1, person2])
+    json_patient_data = Utilities.retrieve_json_patient_data()
+    patients = convert_json_data_to_patients(json_patient_data)
 
     window.window.destroy()
     second_window = Window("View Patients")

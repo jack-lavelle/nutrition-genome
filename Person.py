@@ -15,3 +15,14 @@ class Person:
 
     def add_report(self, date):
         pass
+
+
+@staticmethod
+def convert_json_data_to_patients(json_patient_data: str):
+    patients = []
+    for name in json_patient_data:
+        patient_data = json_patient_data[name]
+        genes = patient_data["genes"]
+        patients.append(Person(name, genes))
+
+    return patients
