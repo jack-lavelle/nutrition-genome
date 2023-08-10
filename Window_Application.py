@@ -40,6 +40,7 @@ def home_window(
         command=partial(choose_genes_window, root_window),
     )
     screen1_button.pack()
+    root_window.window.focus_force()
     root_window.window.mainloop()
 
 
@@ -98,6 +99,7 @@ def choose_genes_window(window: Window = None):
     return_home_button.pack()
 
     second_window.resize_window()
+    second_window.window.focus_force()
     second_window.window.mainloop()
 
 
@@ -184,6 +186,7 @@ def view_patients(window: Window):
     )
     return_home_button.pack()
 
+    second_window.window.focus_force()
     second_window.window.mainloop()
 
 
