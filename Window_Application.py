@@ -103,7 +103,9 @@ def choose_genes_window(window: Window = None):
     second_window.window.mainloop()
 
 
-def add_and_select_genes(current_selections, window, total_selections):
+def add_and_select_genes(
+    current_selections: dict, window: Window, total_selections: dict
+):
     gene_master_data = Utilities.load_master_data()
 
     gene_sections = list(gene_master_data.keys())
@@ -114,7 +116,10 @@ def add_and_select_genes(current_selections, window, total_selections):
         label.pack()
 
         for gene in genes:
-            current_selections[gene] = tk.BooleanVar()
+            # avoid duplicating genes in current_selections
+            if gene not in current_selections:
+                current_selections[gene] = tk.BooleanVar()
+
             checkbox = ttk.Checkbutton(
                 window.window, text=gene, variable=current_selections[gene]
             )
