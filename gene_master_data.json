@@ -47,6 +47,38 @@
         "Supplements": ["Lithium", "Acetylcholine", "Bifidobacterium longum"]
       },
       "Avoid": ["Chronic stress"]
+    },
+    "GAD1": {
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "Lower GABA-sleep/calm hormone",
+      "Include": {
+        "Lifestyle": ["Endurance exercise", "yoga", "meditation", "deep sleep"],
+        "Nutrition": ["DHA", "Green tea", "Low glycemic diet"],
+        "Supplements": [
+          "B6",
+          "Taurine",
+          "Mg",
+          "Vitamin C",
+          "Lithium",
+          "Lion’s Mane Mushroom",
+          "Acetylcholine",
+          "Bifidobacterium longum",
+          "Progesterone",
+          "Turmeric"
+        ]
+      },
+      "Avoid": ["Aspartame", "MSG"]
+    },
+    "SHBG rs6258": {
+      "Sex": "Female",
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "Associated with depression",
+      "Include": {
+        "Lifestyle": ["Weightlifting"],
+        "Nutrition": ["Higher healthy fat intake"],
+        "Supplements": ["Magnesium", "Zinc", "Vitamin D", "Omega-3", "Boron"]
+      },
+      "Avoid": ["high fructose", "corn syrup", "agave", "crystalline fructose"]
     }
   },
   "Brain Health": {
@@ -71,6 +103,199 @@
         "Supplements": []
       },
       "Avoid": ["Pesticides", "CBD oil", "Phthalates"]
+    },
+    "BDNF": {
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "Compromises neuroplasticity & cognitive function",
+      "Include": {
+        "Lifestyle": ["Running", "Sauna"],
+        "Nutrition": ["Diet with low saturated fat", "DHA", "Green tea"],
+        "Supplements": ["Lithium", "Acetylcholine", "Bifidobacterium longum"]
+      },
+      "Avoid": ["Chronic stress"]
+    },
+    "CYP2C9": {
+      "Relevant Genotype(s)": ["heterozygous", "homozygous"],
+      "Significance": "Poor THC metabolism",
+      "Avoid": ["Avoid or minimize THC (especially edible and vegetable oils)"]
+    },
+    "CYP2D6": {
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "Poor metabolizer for antidepressants",
+      "Avoid": ["Antidepressants"]
+    },
+    "ANKK1": {
+      "Relevant Genotype(s)": [
+        "heterozygous",
+        "homozygous: low dopamine receptors"
+      ],
+      "Significance": "Associated with addictive behavior, restlessness, compulsive eating, ADHD.",
+      "Include": {
+        "Lifestyle": [
+          "Meditation",
+          "8 hours of sleep",
+          "High intensity exercise"
+        ],
+        "Nutrition": ["Fiber", "Omega 3 fatty acids"],
+        "Supplements": ["Vitamin D", "Fish oil"]
+      },
+      "Avoid": [
+        "High media exposure",
+        "Refined sugar",
+        "Low iron",
+        "Elevated lead levels"
+      ]
+    },
+    "DI02": {
+      "Relevant Genotype(s)": ["homozygous"],
+      "Significance": "Associated with mild hypothyroidism in the brain and potential link to bipolar disorder",
+      "Include": {
+        "Supplements": ["Selenium", "Zinc"]
+      }
+    },
+    "FADS2": {
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "Omega3 needed for cognition and mood",
+      "Include": {
+        "Supplements": ["Animal based EPA and EHA"]
+      }
+    },
+    "HNMT": {
+      "Relevant Genotype(s)": ["Wild Type"],
+      "Significance": "Poor histamine clearance due to food dyes and preservatives",
+      "Include": {
+        "Nutrition": [
+          "Fennel",
+          "Ginger",
+          "Wild oregano",
+          "Egg yolk",
+          "Chamomile tea",
+          "Basil",
+          "Echinacea tea"
+        ],
+        "Supplements": [
+          "Vitamin C",
+          "Choline",
+          "Folate",
+          "Mg",
+          "Stinging nettle"
+        ]
+      },
+      "Avoid": ["Food dyes", "sodium benzoate"]
+    },
+    "MTHFR - 1298": {
+      "Relevant Genotype(s)": ["homozygous"],
+      "Significance": "Associated with mental health due to low levels of serotonin, melatonin, dopamine, NE, and epi",
+      "Include": {
+        "Nutrition": [
+          "Methyl folate helps NO2 production for cognitive function",
+          "Methyl folate",
+          "Vit C",
+          "Selenium",
+          "Mg",
+          "B6",
+          "L-arginine",
+          "BH4 supplement"
+        ]
+      },
+      "Avoid": [
+        "High protein diet due to methionine sensitivity",
+        "PPIs",
+        "OCPs",
+        "NSAIDs",
+        "Antibiotics"
+      ]
+    },
+    "MTHFR - H667": {
+      "Relevant Genotype(s)": ["Heterozygous"],
+      "Significance": "Associated with mental health due to low levels of serotonin, melatonin, dopamine, NE, and epi",
+      "Include": {
+        "Nutrition": [
+          "Methyl folate helps NO2 production for cognitive function",
+          "Methyl folate",
+          "Vit C",
+          "Selenium",
+          "Mg",
+          "B6",
+          "L-arginine",
+          "BH4 supplement"
+        ]
+      },
+      "Avoid": [
+        "High protein diet due to methionine sensitivity",
+        "PPIs",
+        "OCPs",
+        "NSAIDs",
+        "Antibiotics"
+      ]
+    },
+    "MTHFR - 677/1298": {
+      "Relevant Genotype(s)": ["homozygous", "heterozygous"],
+      "Significance": "Associated with mental health due to low levels of serotonin, melatonin, dopamine, NE, and epi",
+      "Include": {
+        "Nutrition": [
+          "Methyl folate helps NO2 production for cognitive function",
+          "Methyl folate",
+          "Vit C",
+          "Selenium",
+          "Mg",
+          "B6",
+          "L-arginine",
+          "BH4 supplement"
+        ]
+      },
+      "Avoid": [
+        "High protein diet due to methionine sensitivity",
+        "PPIs",
+        "OCPs",
+        "NSAIDs",
+        "Antibiotics"
+      ]
+    },
+    "NBPF3": {
+      "Relevant Genotype(s)": ["hetero", "homozygous: poor B6 processing"],
+      "Significance": "Associated with anxiety, anorexia, PMS, depression, anxiety",
+      "Include": {
+        "Supplements": ["B6 supplement"]
+      },
+      "Avoid": [
+        "Minimize sugar",
+        "stress",
+        "alcohol",
+        "refined carbohydrates",
+        "antibiotics",
+        "OCPs"
+      ]
+    },
+    "NOS1": {
+      "Relevant Genotype(s)": ["Homo", "heterozygous"],
+      "Significance": "Depression. Increased stress",
+      "Include": {
+        "Nutrition": ["Carotenoids", "polyphenols", "DHA"],
+        "Supplements": ["BH4 supplement"]
+      }
+    },
+    "NOS2": {
+      "Relevant Genotype(s)": ["Homo", "heterozygous"],
+      "Significance": "Depression. Increased stress",
+      "Include": {
+        "Nutrition": ["L-arginine", "seaweed", "whey protein", "cordyceps"]
+      }
+    },
+    "PEMT": {
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "Associated anxiety, poor memory",
+      "Include": {
+        "Nutrition": ["Betaine and choline", "Vitamin C"]
+      },
+      "Avoid": [
+        "nighttime pain relievers",
+        "antihistamines",
+        "sleep aids",
+        "antidepressants",
+        "incontinence drugs",
+        "narcotic pain relievers"
+      ]
     }
   },
   "Heart Health": {
@@ -120,6 +345,214 @@
         "Supplements": []
       },
       "Avoid": []
+    },
+    "AGTR1 - Male": {
+      "Sex": "Male",
+      "Relevant Genotype(s)": ["Homozygous"],
+      "Significance": "Higher BP and high fat diet",
+      "Include": {
+        "Lifestyle": [
+          "Decreasing overall fat intake",
+          "Improve Nitric Oxide: Nose breathing"
+        ],
+        "Nutrition": [
+          "phytoestrogens found in hummus, peanuts, miso soup, tahini sauce, and cruciferous vegetables"
+        ],
+        "Supplements": ["Beet Root extract wafers"]
+      },
+      "Avoid": ["High fat diets"]
+    },
+    "AGTR1 - Female": {
+      "Sex": "Female",
+      "Relevant Genotype(s)": ["all"],
+      "Significance": "Higher BP and high fat diet",
+      "Include": {
+        "Nutrition": [
+          "Increasing vitamin C",
+          "folate",
+          "leafy green vegetables"
+        ],
+        "Supplements": ["L-arginine", "magnesium", "Vitamin D", "DHA"]
+      },
+      "Avoid": ["High fat diets"]
+    },
+    "FADS2": {
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "Critical in CV health",
+      "Include": {
+        "Nutrition": [
+          "Animal based EPA and EHA",
+          "Omega-3 fatty acids - most important dietary measures for CV health"
+        ],
+        "Supplements": ["Fish oil"]
+      }
+    },
+    "MTHFR - A128C": {
+      "Relevant Genotype(s)": ["heterozygous"],
+      "Significance": "Elevated homocysteine levels associated with blood vessel inflammation and heart attacks",
+      "Include": {
+        "Nutrition": ["Methyl folate", "B2"]
+      },
+      "Avoid": [
+        "Aspartame",
+        "Chronic stress",
+        "Folic acid",
+        "High protein diets"
+      ]
+    },
+    "MTHFR - 1298/677": {
+      "Relevant Genotype(s)": ["heterozygous"],
+      "Significance": "Elevated homocysteine levels associated with blood vessel inflammation and heart attacks",
+      "Include": {
+        "Nutrition": ["Methyl folate", "B2"]
+      },
+      "Avoid": [
+        "Aspartame",
+        "Chronic stress",
+        "Folic acid",
+        "High protein diets"
+      ]
+    },
+    "NOS3": {
+      "Relevant Genotype(s)": ["homo", "heterozygous"],
+      "Significance": "Poor control blood pressure, atherosclerosis",
+      "Include": {
+        "Nutrition": ["seaweed"],
+        "Supplements": ["L-arginine", "Cordyceps", "whey protein"]
+      }
+    },
+    "SOD3 - r213G": {
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "Superoxide dismutase dysfunction, reduced ability to reduce inflammation in the blood vessels",
+      "Include": {
+        "Nutrition": [
+          "Zinc:Copper 8:1-12:1",
+          "Choline (protect cell membrane)",
+          "Vitamin C",
+          "Vitamin E",
+          "CoQ10",
+          "Carotenoids"
+        ]
+      }
+    },
+    "VOKRC1*2": {
+      "Relevant Genotype(s)": ["homo", "heterozygous"],
+      "Significance": "Associated with arterial calcification",
+      "Include": {
+        "Nutrition": ["MK7 found in natto, certain cheese, and goose liver"],
+        "Supplements": ["MK7"]
+      },
+      "Avoid": ["long-term use of anticoagulants and statin drugs"]
+    }
+  },
+  "Hormones": {
+    "SHBG rs6258 - Male": {
+      "Sex": "Male",
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "High fructose intake lowers testosterone",
+      "Include": {
+        "Nutrition": ["Omega-3"],
+        "Supplements": ["Magnesium", "Zinc", "Vitamin D", "Fish oil", "Boron"],
+        "Lifestyle": ["Higher healthy fat intake", "Weightlifting"]
+      },
+      "Avoid": ["high fructose", "corn syrup", "agave", "crystalline fructose"]
+    },
+    "SHBG rs6258 - Female": {
+      "Sex": "Female",
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "High fructose intake lowers estrogen levels",
+      "Include": {
+        "Nutrition": ["Omega-3"],
+        "Supplements": ["Magnesium", "Zinc", "Vitamin D", "Fish oil", "Boron"],
+        "Lifestyle": ["Higher healthy fat intake", "Weightlifting"]
+      },
+      "Avoid": ["high fructose", "corn syrup", "agave", "crystalline fructose"]
+    }
+  },
+  "Gut Health": {
+    "BCMO1": {
+      "Relevant Genotype(s)": ["hetero", "homozygous"],
+      "Significance": "Associated with digestive lining repair, oral health, eye health, iron mobilization, mitochondrial health, skin health, lung function, and lowering immunity",
+      "Include": {
+        "Nutrition": ["Vitamin A"]
+      }
+    },
+    "FTO": {
+      "Relevant Genotype(s)": ["homozygous"],
+      "Significance": "Associated with increased appetite and overeating. More prone to obesity from saturated fat",
+      "Include": {
+        "Lifestyle": [
+          "Breakfast: protein and fiber-rich carbohydrates (especially prebiotic fiber) = most effective at suppressing ghrelin levels throughout the day",
+          "7-8 hours of sleep per night",
+          "High-intensity or >1-hour aerobic exercise"
+        ],
+        "Nutrition": ["Prebiotic fiber", "Poly and monounsaturated fats"],
+        "Supplements": ["Vitamin D", "Bifidobacterium probiotic"]
+      },
+      "Avoid": [
+        "Minimize poor sleep",
+        "refined carbohydrate breakfast",
+        "high saturated fat intake"
+      ]
+    },
+    "HLADQ2.5/HLADQ8": {
+      "Relevant Genotype(s)": ["heterozygous", "homozygous"],
+      "Significance": "Associated with celiac disease",
+      "Avoid": ["Gluten if testing positive for celiac"]
+    },
+    "SOD2": {
+      "Relevant Genotype(s)": ["homozygous"],
+      "Significance": "Associated with colitis",
+      "Include": {
+        "Supplements": ["Lactobacillus"]
+      }
+    },
+    "TCN2": {
+      "Relevant Genotype(s)": ["homozygous"],
+      "Significance": "Associated with ulcerative colitis",
+      "Include": {
+        "Supplements": ["Lithium"]
+      },
+      "Avoid": ["High B12 blood levels"]
+    },
+    "Apoe - E3/3": {
+      "Significance": [
+        "Most common ApoE in agricultural communities",
+        "Extended cognitive fitness and enhanced expression of anti-aging sirtuins",
+        "Improved HDL and LDL profile",
+        "Improved ability to repair synapses and neural protection",
+        "Higher viral protection"
+      ]
+    },
+    "Apoe - e2/3, e2/2": {
+      "Significance": [
+        "7.2% of the world population",
+        "Newest ApoE variant",
+        "More protective against cognitive decline and heart disease",
+        "Greater probability of survival to an advanced age"
+      ]
+    },
+    "Apoe - e4, e3/4, E4/4": {
+      "Significance": [
+        "Associated with Alzheimer’s, Parkinson’s, Huntington’s, depression, bipolar, migraines, and anxiety",
+        "Oldest hunter-gatherer allele"
+      ],
+      "Include": {
+        "Lifestyle": [
+          "Hunter gatherer diet - focuses on neural repair and preservation",
+          "30 min cardio 5x / week",
+          "8 hours sleep",
+          "Intermittent fasting (13-16 hours)"
+        ],
+        "Supplements": [
+          "Promote neurite outgrowth: Lion’s mane mushroom, reishi, tiger milk mushroom, Ganoderma neo-japonicum, and Cordyceps militaris",
+          "Vitamin B, C, E - improved memory",
+          "Selenium, Lithium",
+          "Phospholipid-based EPA and DHA instead of fish oil",
+          "Ashwagandha, Polyphenols (piceatannol, fisetin, quercetin, and resveratrol)"
+        ],
+        "Avoid": ["Mediterranean diet", "Alcohol"]
+      }
     }
   },
   "Stress Response": {
@@ -154,6 +587,40 @@
         "Supplements": ["Vit D", "Omega-3-Fatty Acid"]
       },
       "Avoid": []
+    },
+    "COMT Intermediate": {
+      "Significance": [
+        "Intermediate metabolizer of dopamine, estrogen, and adrenaline: Body may overreact to stress and pressure",
+        "Associated with anxiety, depression, impulsiveness, obsessive behavior, irritability, ADHD, and abnormal behavior"
+      ],
+      "Include": {
+        "Lifestyle": [
+          "Weight training and sprint-based activities - increase testosterone - COMT speeds up and calms the brain by assisting dopamine, adrenaline, and estrogen metabolism"
+        ],
+        "Nutrition": [
+          "Medium to low catecholamine intake - 1-2 cups of coffee or green tea"
+        ],
+        "Supplements": ["Vitamin C", "Magnesium", "Copper"]
+      }
+    },
+    "COMT SLOW": {
+      "Significance": [
+        "Slow metabolizer of dopamine, estrogen, adrenaline",
+        "Higher IQ, creativity, better memory, drive, reading comprehension, and overall cognitive function",
+        "Body overreacts to stress - Anxiety, impulsiveness, obsessive behavior, irritability (especially under stress), ADHD, abnormal behavior"
+      ],
+      "Include": {
+        "Lifestyle": [
+          "Lower dosages of catecholamines, quercetin, resveratrol - “Less is more”",
+          "Weight training and sprint activities - increase testosterone (speeds up COMT) and calms brain by assisting dopamine, adrenaline, and estrogen metabolism",
+          "Low fiber",
+          "Eliminate xenoestrogen exposure"
+        ],
+        "Nutrition": [
+          "Green tea for breast cancer protection (retaining polyphenols longer)"
+        ],
+        "Supplements": ["Magnesium", "Vitamin C", "Balanced Copper"]
+      }
     }
   },
   "Tissue / Genetic Repair": {
