@@ -24,7 +24,7 @@ def retrieve_json_patient_data():
 
 @staticmethod
 def load_master_data() -> dict:
-    with open("gene_master_data.json", "r") as file:
+    with open("gene_master_data.json", "r", encoding="utf-8") as file:
         Utilities.gene_master_data = json.load(file)
 
     return Utilities.gene_master_data
