@@ -44,26 +44,24 @@ def home_window(
     root_window.window.mainloop()
 
 
-def add_patient_action(window: Window = None, entry=None, selected_genes=None):
-    # Close the first window
-
-    selected_items = []
-    for item, var in selected_genes.items():
-        if var.get():
-            selected_items.append(item)
-
-    name = entry.get()
-    if name != "First and Last Name":
-        print("Entered name:", name)
-    print(name, selected_items)
-
-    home_window(False, True, window)
-
-
 def choose_genes_window(window: Window = None):
+    def add_patient_action(entry=None, selected_genes=None):
+        # Close the first window
+
+        selected_items = []
+        for item, var in selected_genes.items():
+            if var.get():
+                selected_items.append(item)
+
+        if entry:
+            name = entry.get()
+            if name != "First and Last Name":
+                print("Entered name:", name)
+            print(name, selected_items)
+
     window.window.destroy()
-    second_window = Window("Add a New Patient")
-    entry = tk.Entry(second_window.window, fg="gray")
+    window = Window("Add a New Patient")
+    entry = tk.Entry(window.window, fg="gray")
 
     def on_entry_click(event):
         if entry.get() == "First and Last Name":
@@ -82,52 +80,59 @@ def choose_genes_window(window: Window = None):
     entry.pack()
 
     total_checkboxes = {}
-    total_checkboxes = add_new_patient_window({}, second_window, total_checkboxes)
-
-    button = ttk.Button(
-        second_window.window,
-        text="Add Patient",
-        command=partial(add_patient_action, second_window, entry, total_checkboxes),
-    )
-    button.pack()
-
-    return_home_button = ttk.Button(
-        second_window.window,
-        text="Return To Home",
-        command=partial(return_home, second_window),
-    )
-    return_home_button.pack()
-
-    second_window.resize_window()
-    second_window.window.focus_force()
-    second_window.window.mainloop()
-
-
-def add_new_patient_window(
-    current_selections: dict, window: Window, total_selections: dict
-):
+    current_selections = {}
     gene_master_data = Utilities.load_master_data()
+    gene_groups = Utilities.Utilities.categorize_genes()
 
-    gene_sections = list(gene_master_data.keys())
-    for gene_section in gene_sections:
-        genes = list(gene_master_data[gene_section].keys())
+    first_gene_selection_window = True
+    for gene_group in gene_groups:
+        if not first_gene_selection_window:
+            window.window.destroy()
+            window = Window("PLACEHOLDER - GENE SECTION TITLES")
 
-        label = tk.Label(window.window, text=gene_section)
-        label.pack()
+        for gene_section in gene_group:
+            genes = list(gene_master_data[gene_section].keys())
 
-        for gene in genes:
-            # avoid duplicating genes in current_selections
-            if gene not in current_selections:
-                current_selections[gene] = tk.BooleanVar()
+            label = tk.Label(window.window, text=gene_section)
+            label.pack()
 
-            checkbox = ttk.Checkbutton(
-                window.window, text=gene, variable=current_selections[gene]
+            for gene in genes:
+                # avoid duplicating genes in current_selections
+                if gene not in current_selections:
+                    current_selections[gene] = tk.BooleanVar()
+
+                checkbox = ttk.Checkbutton(
+                    window.window, text=gene, variable=current_selections[gene]
+                )
+                checkbox.pack()
+
+            total_checkboxes = current_selections | total_checkboxes
+
+        if first_gene_selection_window:
+            button = ttk.Button(
+                window.window,
+                text="Continue",
+                command=partial(add_patient_action, window, entry, total_checkboxes),
             )
-            checkbox.pack()
+            button.pack()
+        else:
+            button = ttk.Button(
+                window.window,
+                text="Continue",
+                command=partial(add_patient_action, window, total_checkboxes),
+            )
+            button.pack()
 
-        total_selections = current_selections | total_selections
+        return_home_button = ttk.Button(
+            window.window,
+            text="Return To Home",
+            command=partial(return_home, window),
+        )
+        return_home_button.pack()
 
-    return total_selections
+        window.resize_window()
+        window.window.focus_force()
+        window.window.mainloop()
 
 
 def add_title_checkboxes(
