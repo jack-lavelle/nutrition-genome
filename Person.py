@@ -6,9 +6,15 @@ class Person:
     reportsDict = {}
     genes = {}
 
-    def __init__(self, name=None, genes={}) -> None:
+    def __init__(self, name=None, genes=None) -> None:
         self.name = name
-        self.genes = genes
+        if not genes:
+            patient_genes = {}
+            for gene_section in list(Utilities.gene_master_data.keys()):
+                patient_genes[gene_section] = {}
+            self.genes = patient_genes
+        else:
+            self.genes = genes
 
     def generate_genes(self):
         self.genes = Utilities.generate_genes()
