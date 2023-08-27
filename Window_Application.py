@@ -1,4 +1,5 @@
 import tkinter as tk
+import sys
 from tkinter import ttk
 from functools import partial
 from Window import Window
@@ -37,102 +38,126 @@ def home_window(
     screen1_button = ttk.Button(
         root_window.window,
         text="Add a New Patient",
-        command=partial(choose_genes_window, root_window),
+        command=partial(initial_gene_selection_driver, root_window),
     )
     screen1_button.pack()
     root_window.window.focus_force()
     root_window.window.mainloop()
 
 
-def choose_genes_window(window: Window = None):
-    def add_patient_action(entry=None, selected_genes=None):
-        # Close the first window
+def initial_gene_selection_driver(window: Window):
+    gene_selection_driver(window, 0, {}, {})
 
-        selected_items = []
-        for item, var in selected_genes.items():
-            if var.get():
-                selected_items.append(item)
 
-        if entry:
-            name = entry.get()
-            if name != "First and Last Name":
-                print("Entered name:", name)
-            print(name, selected_items)
-
-    window.window.destroy()
-    window = Window("Add a New Patient")
-    entry = tk.Entry(window.window, fg="gray")
-
-    def on_entry_click(event):
-        if entry.get() == "First and Last Name":
-            entry.delete(0, tk.END)  # Delete default text
-            entry.config(fg="black")  # Change text color to black
-
-    def on_focus_out(event):
-        if entry.get() == "":
-            entry.insert(0, "First and Last Name")  # Insert default text
-            entry.config(fg="gray")  # Change text color to gray
-
-    default_text = "First and Last Name"
-    entry.insert(0, default_text)  # Set initial text
-    entry.bind("<FocusIn>", on_entry_click)  # Bind click event
-    entry.bind("<FocusOut>", on_focus_out, entry)  # Bind focus out event
-    entry.pack()
-
-    total_checkboxes = {}
-    current_selections = {}
-    gene_master_data = Utilities.load_master_data()
+def gene_selection_driver(
+    window: Window,
+    iteration_index: int,
+    total_checkboxes: dict,
+    current_checkboxes: dict,
+):
     gene_groups = Utilities.Utilities.categorize_genes()
+    window.window.destroy()
 
-    first_gene_selection_window = True
-    for gene_group in gene_groups:
-        if not first_gene_selection_window:
-            window.window.destroy()
-            window = Window("PLACEHOLDER - GENE SECTION TITLES")
-
-        for gene_section in gene_group:
-            genes = list(gene_master_data[gene_section].keys())
-
-            label = tk.Label(window.window, text=gene_section)
-            label.pack()
-
-            for gene in genes:
-                # avoid duplicating genes in current_selections
-                if gene not in current_selections:
-                    current_selections[gene] = tk.BooleanVar()
-
-                checkbox = ttk.Checkbutton(
-                    window.window, text=gene, variable=current_selections[gene]
-                )
-                checkbox.pack()
-
-            total_checkboxes = current_selections | total_checkboxes
-
-        if first_gene_selection_window:
-            button = ttk.Button(
-                window.window,
-                text="Continue",
-                command=partial(add_patient_action, window, entry, total_checkboxes),
-            )
-            button.pack()
-        else:
-            button = ttk.Button(
-                window.window,
-                text="Continue",
-                command=partial(add_patient_action, window, total_checkboxes),
-            )
-            button.pack()
-
-        return_home_button = ttk.Button(
-            window.window,
-            text="Return To Home",
-            command=partial(return_home, window),
+    if iteration_index < len(gene_groups):
+        # while iteration_index < len(gene_groups), continue to add genes to patient ... not yet
+        # done creating patient entry.
+        gene_group = gene_groups[iteration_index]
+        window = Window(" | ".join(gene_group))
+        handle_gene_window(
+            window,
+            iteration_index,
+            gene_group,
+            total_checkboxes,
+            current_checkboxes,
         )
-        return_home_button.pack()
+    else:
+        # patient data complete, add them to patients
+        print("Adding a patient is not yet implemented.")
+        sys.exit()
 
-        window.resize_window()
-        window.window.focus_force()
-        window.window.mainloop()
+
+def handle_gene_window(
+    window: Window,
+    iteration_index: int,
+    gene_group: list,
+    total_checkboxes: dict,
+    current_checkboxes: dict,
+):
+    gene_master_data = Utilities.load_master_data()
+    entry = None
+    if iteration_index == 0:
+        entry = tk.Entry(window.window, fg="gray")
+
+        def on_entry_click(event):
+            if entry.get() == "First and Last Name":
+                entry.delete(0, tk.END)  # Delete default text
+                entry.config(fg="black")  # Change text color to black
+
+        def on_focus_out(event):
+            if entry.get() == "":
+                entry.insert(0, "First and Last Name")  # Insert default text
+                entry.config(fg="gray")  # Change text color to gray
+
+        default_text = "First and Last Name"
+        entry.insert(0, default_text)  # Set initial text
+        entry.bind("<FocusIn>", on_entry_click)  # Bind click event
+        entry.bind("<FocusOut>", on_focus_out, entry)  # Bind focus out event
+        entry.pack()
+
+    for gene_section in gene_group:
+        genes = list(gene_master_data[gene_section].keys())
+
+        label = tk.Label(window.window, text=gene_section)
+        label.pack()
+
+        for gene in genes:
+            # avoid duplicating genes in current_selections
+            if gene not in current_checkboxes:
+                current_checkboxes[gene] = tk.BooleanVar()
+
+            checkbox = ttk.Checkbutton(
+                window.window, text=gene, variable=current_checkboxes[gene]
+            )
+            checkbox.pack()
+
+        total_checkboxes = current_checkboxes | total_checkboxes
+
+    button = ttk.Button(
+        window.window,
+        text="Continue",
+        command=partial(
+            add_patient_action, window, iteration_index, entry, total_checkboxes
+        ),
+    )
+    button.pack()
+
+    return_home_button = ttk.Button(
+        window.window,
+        text="Return To Home",
+        command=partial(return_home, window),
+    )
+    return_home_button.pack()
+
+    window.resize_window()
+    window.window.focus_force()
+    window.window.mainloop()
+
+
+def add_patient_action(window, iteration_index, entry=None, genes=None):
+    # Close the first window
+
+    selected_genes = {}
+    for gene, selected_bool in genes.items():
+        if selected_bool.get():
+            selected_genes[gene] = selected_bool
+
+    if entry:
+        name = entry.get()
+        if name != "First and Last Name":
+            print("Entered name:", name)
+    print(selected_genes)
+
+    gene_selection_driver(window, iteration_index + 1, selected_genes, {})
 
 
 def add_title_checkboxes(
@@ -216,6 +241,8 @@ def view_patient_window(window: Window, patient: Person):
     entry.pack()
 
     total_checkboxes = {}
+    print("~~ ERROR ~~ NOT YET IMPLEMENTED")
+    sys.exit()
     total_checkboxes = add_new_patient_window({}, second_window, total_checkboxes)
 
     button = ttk.Button(
