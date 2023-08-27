@@ -14,6 +14,12 @@ class Tests(unittest.TestCase):
 
         self.assertIsNotNone(person.genes)
 
+    def test_person_genes(self):
+        person = Person("Donald Fagen")
+        person.generate_genes()
+
+        self.assertEqual(type(person.genes), dict)
+
 
 if __name__ == "__main__":
     try:
