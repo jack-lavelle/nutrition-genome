@@ -6,12 +6,18 @@ class Person:
     reportsDict = {}
     genes = {}
 
-    def __init__(self, name, genes=None) -> None:
+    def __init__(self, name=None, genes=None) -> None:
         self.name = name
-        if genes:
-            self.genes = genes
+        if not genes:
+            patient_genes = {}
+            for gene_section in list(Utilities.gene_master_data.keys()):
+                patient_genes[gene_section] = {}
+            self.genes = patient_genes
         else:
-            self.genes = Utilities.generate_genes()
+            self.genes = genes
+
+    def generate_genes(self):
+        self.genes = Utilities.generate_genes()
 
     def add_report(self, date):
         pass

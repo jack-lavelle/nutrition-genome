@@ -83,3 +83,27 @@ class Utilities:
             ]
 
         return all_genes
+
+    @staticmethod
+    def categorize_genes() -> list[list]:
+        gene_master_data = load_master_data()
+        gene_sections = list(gene_master_data.keys())
+        gene_groups = []
+        gene_group = []
+        gene_count = 0
+
+        for gene_section in gene_sections:
+            number_of_genes_in_section = len(
+                list(gene_master_data[gene_section].keys())
+            )
+
+            if gene_count + number_of_genes_in_section <= 20:
+                gene_group.append(gene_section)
+                gene_count += number_of_genes_in_section
+            else:
+                gene_groups.append(gene_group)
+                gene_group = [gene_section]
+                gene_count = number_of_genes_in_section
+
+        gene_groups.append(gene_group)
+        return gene_groups
