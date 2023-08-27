@@ -38,18 +38,27 @@ def home_window(
     screen1_button = ttk.Button(
         root_window.window,
         text="Add a New Patient",
-        command=partial(initial_gene_selection_driver, root_window),
+        command=partial(initial_gene_selection_driver, root_window, None),
     )
     screen1_button.pack()
     root_window.window.focus_force()
     root_window.window.mainloop()
 
 
-def initial_gene_selection_driver(window: Window):
-    gene_selection_driver(window, 0, {}, {})
+def initial_gene_selection_driver(window: Window, patient: Person):
+    if not patient:
+        patient = Person()
+
+    gene_master_data = Utilities.load_master_data()
+    patient_genes = {}
+    for gene_section in list(gene_master_data.keys()):
+        patient_genes[gene_section] = {}
+
+    gene_selection_driver(patient, window, 0, {}, patient_genes)
 
 
 def gene_selection_driver(
+    patient: Person,
     window: Window,
     iteration_index: int,
     total_checkboxes: dict,
@@ -64,6 +73,7 @@ def gene_selection_driver(
         gene_group = gene_groups[iteration_index]
         window = Window(" | ".join(gene_group))
         handle_gene_window(
+            patient,
             window,
             iteration_index,
             gene_group,
@@ -72,11 +82,14 @@ def gene_selection_driver(
         )
     else:
         # patient data complete, add them to patients
+        # TODO: when editing existing patient, handle existing names and genes.
+
         print("Adding a patient is not yet implemented.")
         sys.exit()
 
 
 def handle_gene_window(
+    patient: Person,
     window: Window,
     iteration_index: int,
     gene_group: list,
@@ -112,21 +125,30 @@ def handle_gene_window(
 
         for gene in genes:
             # avoid duplicating genes in current_selections
-            if gene not in current_checkboxes:
-                current_checkboxes[gene] = tk.BooleanVar()
+            if gene not in current_checkboxes[gene_section]:
+                current_checkboxes[gene_section][gene] = tk.BooleanVar()
 
             checkbox = ttk.Checkbutton(
-                window.window, text=gene, variable=current_checkboxes[gene]
+                window.window,
+                text=gene,
+                variable=current_checkboxes[gene_section][gene],
             )
             checkbox.pack()
 
-        total_checkboxes = current_checkboxes | total_checkboxes
+        total_checkboxes[gene_section] = current_checkboxes[
+            gene_section
+        ] | total_checkboxes.get(gene_section, {})
 
     button = ttk.Button(
         window.window,
         text="Continue",
         command=partial(
-            add_patient_action, window, iteration_index, entry, total_checkboxes
+            add_patient_action,
+            patient,
+            window,
+            iteration_index,
+            entry,
+            total_checkboxes,
         ),
     )
     button.pack()
@@ -143,21 +165,36 @@ def handle_gene_window(
     window.window.mainloop()
 
 
-def add_patient_action(window, iteration_index, entry=None, genes=None):
+def add_patient_action(
+    patient: Person,
+    window: Window,
+    iteration_index: int,
+    entry=None,
+    genes: dict = None,
+):
     # Close the first window
 
-    selected_genes = {}
-    for gene, selected_bool in genes.items():
-        if selected_bool.get():
-            selected_genes[gene] = selected_bool
+    selected_genes_dict = {}
+
+    for gene_section, gene_bool in genes.items():
+        for gene, boolean in gene_bool.items():
+            if boolean.get():
+                if gene_section not in selected_genes_dict:
+                    selected_genes_dict[gene_section] = []
+
+                selected_genes_dict[gene_section].append(gene)
 
     if entry:
         name = entry.get()
         if name != "First and Last Name":
+            patient.name = name
             print("Entered name:", name)
-    print(selected_genes)
 
-    gene_selection_driver(window, iteration_index + 1, selected_genes, {})
+    print(selected_genes_dict)
+    for gene_section in selected_genes_dict:
+        patient.genes[gene_section] = selected_genes_dict[gene_section]
+
+    gene_selection_driver(patient, window, iteration_index + 1, selected_genes_dict, {})
 
 
 def add_title_checkboxes(
