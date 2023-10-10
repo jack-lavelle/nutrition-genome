@@ -24,7 +24,7 @@ class Person:
 
 
 @staticmethod
-def convert_json_data_to_patients(json_patient_data: str):
+def convert_json_data_to_patients(json_patient_data: dict):
     patients = []
     for name in json_patient_data:
         patient_data = json_patient_data[name]

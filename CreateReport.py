@@ -89,11 +89,16 @@ def create_bullet_pdf():
 
 def add_section(content: list, section: Section):
     content.append(Paragraph(section.section_title, styles["SectionTitle"]))
-    print(section.genes)
     for gene in section.genes:
         content.append(
             Paragraph(
-                section.content[gene]["Significance"] + ".", styles["Significance"]
+                ". ".join(
+                    (lambda x: [x] if isinstance(x, str) else x)(
+                        section.content[gene]["Significance"]
+                    )
+                    + [""]
+                ),
+                styles["Significance"],
             )
         )
         add_body(content, section, gene)

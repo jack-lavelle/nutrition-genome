@@ -1,4 +1,5 @@
 import tkinter as tk
+import os
 from PIL import Image, ImageTk
 
 
@@ -15,7 +16,7 @@ class Window:
             self.window = tk.Tk()
 
         self.window.title(title)
-        ico = Image.open("owm_resources\\logo_icon.png")
+        ico = Image.open(os.path.join("owm_resources","logo_icon.png"))
         photo = ImageTk.PhotoImage(ico)
         self.window.wm_iconphoto(False, photo)
 

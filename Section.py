@@ -1,5 +1,5 @@
 import random
-from Utilities import Utilities
+from Utilities import Utilities, load_master_data
 
 
 class Section:
@@ -24,9 +24,9 @@ class Section:
         for gene in self.genes:
             specific_gene_data = Utilities.gene_master_data[self.section_title][gene]
             self.content[gene] = {
-                "Significance": specific_gene_data["Significance"],
-                "Include": specific_gene_data["Include"],
-                "Avoid": specific_gene_data["Avoid"],
+                "Significance": specific_gene_data.get("Significance", ""),
+                "Include": specific_gene_data.get("Include", ""),
+                "Avoid": specific_gene_data.get("Avoid", ""),
             }
 
     def get_content(self):
@@ -34,7 +34,7 @@ class Section:
 
     def populate_content(self) -> None:
         if Utilities.gene_master_data is None:
-            Utilities.gene_master_data = Utilities.load_master_data()
+            Utilities.gene_master_data = load_master_data()
 
         if self.section_title == "":
             self.section_title = random.choice(

@@ -1,6 +1,7 @@
 import sys
 import os
 
+# TODO: rework all paths to be operating system agnostic
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../../nutrition-genome")
 
 import json
