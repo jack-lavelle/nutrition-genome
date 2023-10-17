@@ -103,25 +103,25 @@ def handle_gene_window(
     for gene_section in list(gene_master_data.keys()):
         current_gene_selection[gene_section] = {}
 
-    entry = None
+    name = None
     if iteration_index == 0:
-        entry = tk.Entry(window.window, fg="gray")
+        name = tk.Entry(window.window, fg="gray")
 
         def on_entry_click(event):
-            if entry.get() == "First and Last Name":
-                entry.delete(0, tk.END)  # Delete default text
-                entry.config(fg="black")  # Change text color to black
+            if name.get() == "First and Last Name":
+                name.delete(0, tk.END)  # Delete default text
+                name.config(fg="black")  # Change text color to black
 
         def on_focus_out(event):
-            if entry.get() == "":
-                entry.insert(0, "First and Last Name")  # Insert default text
-                entry.config(fg="gray")  # Change text color to gray
+            if name.get() == "":
+                name.insert(0, "First and Last Name")  # Insert default text
+                name.config(fg="gray")  # Change text color to gray
 
         default_text = "First and Last Name"
-        entry.insert(0, default_text)  # Set initial text
-        entry.bind("<FocusIn>", on_entry_click)  # Bind click event
-        entry.bind("<FocusOut>", on_focus_out, entry)  # Bind focus out event
-        entry.pack()
+        name.insert(0, default_text)  # Set initial text
+        name.bind("<FocusIn>", on_entry_click)  # Bind click event
+        name.bind("<FocusOut>", on_focus_out, name)  # Bind focus out event
+        name.pack()
 
     for gene_section in gene_group:
         genes = list(gene_master_data[gene_section].keys())
@@ -149,7 +149,7 @@ def handle_gene_window(
             patient,
             window,
             iteration_index,
-            entry,
+            name,
             current_gene_selection,
         ),
     )
