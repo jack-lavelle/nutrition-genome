@@ -16,32 +16,20 @@ class Window:
             self.window = tk.Tk()
 
         self.window.title(title)
-        ico = Image.open(os.path.join("owm_resources","logo_icon.png"))
+        ico = Image.open(os.path.join("owm_resources", "logo_icon.png"))
         photo = ImageTk.PhotoImage(ico)
         self.window.wm_iconphoto(False, photo)
 
-        if not properties:
-            window_width = 400
-            window_height = 400
-            screen_width = self.window.winfo_screenwidth()
-            screen_height = self.window.winfo_screenheight()
-            x_position = int((screen_width / 2) - (window_width / 2))
-            y_position = int((screen_height / 2) - (window_height / 2))
+        window_width = 400
+        window_height = 400
+        screen_width = self.window.winfo_screenwidth()
+        screen_height = self.window.winfo_screenheight()
+        x_position = int((screen_width / 2) - (window_width / 2))
+        y_position = int((screen_height / 2) - (window_height / 2))
 
-            self.window.geometry(
-                f"{window_width}x{window_height}+{x_position}+{y_position}"
-            )
-        else:
-            window_width = 400
-            window_height = 400
-            screen_width = self.window.winfo_screenwidth()
-            screen_height = self.window.winfo_screenheight()
-            x_position = int((screen_width / 2) - (window_width / 2))
-            y_position = int((screen_height / 2) - (window_height / 2))
-
-            self.window.geometry(
-                f"{window_width}x{window_height}+{x_position}+{y_position}"
-            )
+        self.window.geometry(
+            f"{window_width}x{window_height}+{x_position}+{y_position}"
+        )
 
     def set_geometry(self, properties=None):
         self.properties = self.get_current_properties()

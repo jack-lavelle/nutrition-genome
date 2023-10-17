@@ -300,7 +300,6 @@ def view_patient_window(window: Window, patient: Person):
     )
     return_home_button.pack()
 
-    second_window.resize_window()
     second_window.window.focus_force()
     second_window.window.mainloop()
 
