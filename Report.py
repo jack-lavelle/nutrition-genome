@@ -1,10 +1,10 @@
-import Person
+import Patient
 from Section import Section
 
 
 class Report:
-    def __init__(self, person: Person):
-        self.person = person
+    def __init__(self, patient: Patient):
+        self.patient = patient
         self.sections_dict = {}
 
     def setSectionsDict(self, sections_dict: dict):

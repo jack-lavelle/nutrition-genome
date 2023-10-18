@@ -1,7 +1,7 @@
 from Utilities import Utilities
 
 
-class Person:
+class Patient:
     name = None
     reportsDict = {}
     genes = {}
@@ -29,6 +29,6 @@ def convert_json_data_to_patients(json_patient_data: dict):
     for name in json_patient_data:
         patient_data = json_patient_data[name]
         genes = patient_data["genes"]
-        patients.append(Person(name, genes))
+        patients.append(Patient(name, genes))
 
     return patients

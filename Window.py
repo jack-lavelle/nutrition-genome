@@ -7,7 +7,7 @@ class Window:
     title = None
     window = None
     properties = None
-    persons = None
+    patients = None
 
     def __init__(self, title, properties=None, root=None) -> None:
         if root:

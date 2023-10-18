@@ -3,11 +3,11 @@ import sys
 from tkinter import ttk
 from functools import partial
 from Window import Window
-from Person import Person, convert_json_data_to_patients
+from Patient import Patient, convert_json_data_to_patients
 import Utilities
 
 
-# Screens: 1 - welcome: add new person, view current patients
+# Screens: 1 - welcome: add new patient, view current patients
 def add_green_text(window: Window = None):
     label = tk.Label(window.window, text="")
     label.pack()
@@ -45,15 +45,15 @@ def home_window(
     root_window.window.mainloop()
 
 
-def initial_gene_selection_driver(window: Window, patient: Person):
+def initial_gene_selection_driver(window: Window, patient: Patient):
     if not patient:
-        patient = Person()
+        patient = Patient()
 
     gene_selection_driver(patient, window, 0)
 
 
 def gene_selection_driver(
-    patient: Person,
+    patient: Patient,
     window: Window,
     iteration_index: int,
 ):
@@ -81,7 +81,7 @@ def gene_selection_driver(
 
 
 def handle_gene_window(
-    patient: Person,
+    patient: Patient,
     window: Window,
     iteration_index: int,
     gene_group: list,
@@ -158,7 +158,7 @@ def handle_gene_window(
 
 
 def add_patient_action(
-    patient: Person,
+    patient: Patient,
     window: Window,
     iteration_index: int,
     entry=None,
@@ -241,7 +241,7 @@ def view_patients(window: Window):
     window.window.destroy()
     second_window = Window("View Patients")
     patient = create_dropdown_menu(
-        second_window, "Select Patient", [person.name for person in patients]
+        second_window, "Select Patient", [patient.name for patient in patients]
     )
 
     button = ttk.Button(
@@ -262,7 +262,7 @@ def view_patients(window: Window):
     second_window.window.mainloop()
 
 
-def view_patient_window(window: Window, patient: Person):
+def view_patient_window(window: Window, patient: Patient):
     window.window.destroy()
     second_window = Window("View Patient")
     entry = tk.Entry(second_window.window, fg="black")

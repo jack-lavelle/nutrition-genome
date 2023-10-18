@@ -8,7 +8,7 @@ from reportlab.platypus import (
     ListFlowable,
 )
 from Section import Section
-from Person import Person
+from Patient import Patient
 from Utilities import Utilities
 from reportlab.lib.colors import CMYKColor
 
@@ -24,7 +24,7 @@ selected_styles = {
 }
 
 
-def create_pdf(person: Person):
+def create_pdf(patient: Patient):
     # Create a new PDF file
     output_pdf = "output.pdf"
     doc = SimpleDocTemplate(output_pdf, pagesize=letter)
@@ -32,7 +32,7 @@ def create_pdf(person: Person):
     # Define the content
     content = []
     content.append(Paragraph("Nutrition Genome", styles["Title"]))
-    content.append(Paragraph(person.name, styles["SectionTitle"]))
+    content.append(Paragraph(patient.name, styles["SectionTitle"]))
 
     for section_title in list(Utilities.get_gene_master_data().keys()):
         add_section(content, Section(section_title, genes=None))
@@ -173,5 +173,5 @@ def get_lorem_ipsum():
 
 
 if __name__ == "__main__":
-    create_pdf(Person("Jack LaVelle"))
+    create_pdf(Patient("Jack LaVelle"))
     # create_bullet_pdf()

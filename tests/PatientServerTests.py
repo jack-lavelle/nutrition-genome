@@ -8,7 +8,7 @@ import json
 import requests
 import unittest
 
-import Person
+import Patient
 import Utilities
 
 
@@ -18,7 +18,7 @@ class Tests(unittest.TestCase):
         # TODO: store patients by uuid
         names = ["George Washington", "Abraham Lincoln", "Gandalf"]
         for name in names:
-            data[name] = Person.Person(name)
+            data[name] = Patient.Patient(name)
 
         data["key"] = "dyqIDK3amOB09U4PSmSDW5FaZiFMNyoCTlmQESTBzh8="
         response = requests.post(
@@ -31,9 +31,9 @@ class Tests(unittest.TestCase):
 
     def test_download_patients(self):
         json_patient_data = Utilities.retrieve_json_patient_data()
-        patients = Person.convert_json_data_to_patients(json_patient_data)
+        patients = Patient.convert_json_data_to_patients(json_patient_data)
 
-        self.assertEqual(type(patients[0]), Person.Person)
+        self.assertEqual(type(patients[0]), Patient.Patient)
 
 
 if __name__ == "__main__":
