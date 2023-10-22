@@ -16,7 +16,6 @@ class Tests(unittest.TestCase):
 
     def test_patient_genes(self):
         patient = Patient("Donald Fagen")
-        patient.generate_genes()
 
         self.assertEqual(type(patient.genes), dict)
 

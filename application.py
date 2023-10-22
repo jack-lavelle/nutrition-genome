@@ -1,14 +1,15 @@
-import sys
 import tkinter as tk
-import re
-from tkinter import ttk
+import sys
+from tkinter import ttk, Widget
 from functools import partial
 from Window import Window
 from Patient import Patient, convert_json_data_to_patients
 import Utilities
-from CreateReport import create_pdf
+import string
+from WrappedWidgets import WrappedWidgets
 
 
+# Screens: 1 - welcome: add new patient, view current patients
 def add_green_text(window: Window = None):
     label = tk.Label(window.window, text="")
     label.pack()
@@ -52,17 +53,6 @@ def initial_gene_selection_driver(window: Window, patient: Patient):
 
     gene_selection_driver(patient, window, 0)
 
-    patients = Utilities.retrieve_json_patient_data()
-    if patient.name in patients:
-        pattern = re.compile(str(patient.name) + " - [0-9]$")
-        name_repetitions = 1
-        for key in patients.keys():
-            if pattern.match(key):
-                name_repetitions += 1
-        patient.name = patient.name + " - " + str(name_repetitions)
-    patients[patient.name] = patient
-    print(patients)
-
 
 def gene_selection_driver(
     patient: Patient,
@@ -87,7 +77,51 @@ def gene_selection_driver(
         # patient data complete, add them to patients
         # TODO: when editing existing patient, handle existing names and genes.
 
-        return
+        print("Adding a patient is not yet implemented.")
+        print(patient.genes)
+        sys.exit()
+
+
+def create_name_widget(window: Window):
+    name_widget = tk.Entry(window.window, fg="gray")
+
+    def on_entry_click(event):
+        if name_widget.get() == "First and Last Name":
+            name_widget.delete(0, tk.END)  # Delete default text
+            name_widget.config(fg="black")  # Change text color to black
+
+    def on_focus_out(event):
+        if name_widget.get() == "":
+            name_widget.insert(0, "First and Last Name")  # Insert default text
+            name_widget.config(fg="gray")  # Change text color to gray
+
+    name_widget.insert(0, "First and Last Name")  # Set initial text
+    name_widget.bind("<FocusIn>", on_entry_click)  # Bind click event
+    name_widget.bind("<FocusOut>", on_focus_out, name_widget)  # Bind focus out event
+    name_widget.pack()
+
+    return name_widget
+
+
+def create_obj_widget(window: Window, objective_int: int):
+    default_text = "Personal Objective " + str(objective_int)
+    text_widget = tk.Text(window.window, height=2.5, width=25, fg="gray")
+
+    def on_entry_click(event):
+        if text_widget.get("1.0", tk.END) == default_text + "\n":
+            text_widget.delete("1.0", tk.END)  # Delete default text
+            text_widget.config(fg="black")  # Change text color to black
+
+    def on_focus_out(event):
+        if text_widget.get("1.0", tk.END) == "\n":
+            text_widget.insert(tk.INSERT, default_text)  # Insert default text
+            text_widget.config(fg="gray")  # Change text color to gray
+
+    text_widget.insert(tk.INSERT, default_text)  # Set initial text
+    text_widget.bind("<FocusIn>", on_entry_click, default_text)  # Bind click event
+    text_widget.bind("<FocusOut>", on_focus_out, text_widget)  # Bind focus out event
+    text_widget.pack()
+    return text_widget
 
 
 def handle_gene_window(
@@ -103,25 +137,16 @@ def handle_gene_window(
     for gene_section in list(gene_master_data.keys()):
         current_gene_selection[gene_section] = {}
 
-    name = None
-    if iteration_index == 0:
-        name = tk.Entry(window.window, fg="gray")
+    # Set patient name and personal objectives if necessary.
+    widgets = {}
+    name_widget = None
+    if not patient.name:
+        name_widget = create_name_widget(window)
+        widgets["name"] = name_widget
 
-        def on_entry_click(event):
-            if name.get() == "First and Last Name":
-                name.delete(0, tk.END)  # Delete default text
-                name.config(fg="black")  # Change text color to black
-
-        def on_focus_out(event):
-            if name.get() == "":
-                name.insert(0, "First and Last Name")  # Insert default text
-                name.config(fg="gray")  # Change text color to gray
-
-        default_text = "First and Last Name"
-        name.insert(0, default_text)  # Set initial text
-        name.bind("<FocusIn>", on_entry_click)  # Bind click event
-        name.bind("<FocusOut>", on_focus_out, name)  # Bind focus out event
-        name.pack()
+    if not patient.objectives:
+        for i in range(1, 4):
+            widgets["obj" + str(i)] = create_obj_widget(window, i)
 
     for gene_section in gene_group:
         genes = list(gene_master_data[gene_section].keys())
@@ -149,7 +174,7 @@ def handle_gene_window(
             patient,
             window,
             iteration_index,
-            name,
+            widgets,
             current_gene_selection,
         ),
     )
@@ -171,9 +196,11 @@ def add_patient_action(
     patient: Patient,
     window: Window,
     iteration_index: int,
-    entry=None,
+    widgets: dict[str, Widget],
     genes: dict = None,
 ):
+    # Close the first window
+
     selected_genes_dict = {}
 
     gene_groups = Utilities.Utilities.categorize_genes()
@@ -189,10 +216,26 @@ def add_patient_action(
 
                     selected_genes_dict[gene_section].append(gene)
 
-    if entry:
-        name = entry.get()
-        if name != "First and Last Name":
-            patient.name = name
+    # TODO: redo this using WrappedWidgets and for loop widget in widgets (which is now of type
+    # WrappedWidgets)
+    if widgets:
+        name_widget = widgets["name"]
+        name = name_widget.get()
+        patient.name = name
+
+        objectives = {}
+        for i in range(1, 4):
+            widget = widgets["obj" + str(i)]
+            # This weird code just processes the string, changing \n, \t, \r to " " and strips
+            # trailing white space.
+            objectives["objective " + str(i)] = (
+                widget.get("1.0", tk.END)
+                .translate(str.maketrans("\n\t\r", "   "))
+                .strip()
+            )
+
+        patient.objectives = objectives
+
     for gene_section in selected_genes_dict:
         patient.genes[gene_section] = selected_genes_dict[gene_section]
 
@@ -279,19 +322,17 @@ def view_patient_window(window: Window, patient: Patient):
     entry.config(fg="black")
     entry.pack()
 
-    update_button = ttk.Button(
-        second_window.window,
-        text="Update Patient - NOT YET IMPLEMENTED",
-        command=print("not yet implemented"),
-    )
-    update_button.pack()
+    total_checkboxes = {}
+    print("~~ ERROR ~~ NOT YET IMPLEMENTED")
+    sys.exit()
+    total_checkboxes = add_new_patient_window({}, second_window, total_checkboxes)
 
-    generate_report_button = ttk.Button(
+    button = ttk.Button(
         second_window.window,
-        text="Generate Report",
-        command=partial(create_pdf, patient),
+        text="Update Patient",
+        command=partial(add_patient_action, second_window, entry, total_checkboxes),
     )
-    generate_report_button.pack()
+    button.pack()
 
     return_home_button = ttk.Button(
         second_window.window,
@@ -300,6 +341,7 @@ def view_patient_window(window: Window, patient: Patient):
     )
     return_home_button.pack()
 
+    second_window.resize_window()
     second_window.window.focus_force()
     second_window.window.mainloop()
 
