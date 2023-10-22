@@ -5,6 +5,8 @@ import os
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../../nutrition-genome")
 import unittest
 
+unittest.TestLoader.sortTestMethodsUsing = None
+
 from Patient import Patient
 import Utilities
 
@@ -13,7 +15,7 @@ import Utilities
 
 
 class Tests(unittest.TestCase):
-    def test_upload_patients(self):
+    def test_a_upload_patients(self):
         patients = []
 
         # TODO: store patients by uuid
@@ -25,17 +27,17 @@ class Tests(unittest.TestCase):
                 "objective 2": "Crush the rebellion.",
                 "objective 3": "Make Luke my apprentice.",
             }
-            patients.append(Patient(name))
+            patients.append(patient)
 
         response = Utilities.upload_patients(patients)
         self.assertEqual(response.status_code, 200)
 
-    def test_download_patients(self):
+    def test_b_download_patients(self):
         patients = Utilities.download_patients()
 
         self.assertEqual(type(patients[0]), Patient)
 
-    def test_delete_patient(self):
+    def test_c_delete_patient(self):
         Utilities.delete_patient("George Washington")
         patients = Utilities.download_patients()
         self.assertNotIn("George Washington", patients)
