@@ -19,6 +19,12 @@ class Tests(unittest.TestCase):
         # TODO: store patients by uuid
         names = ["George Washington", "Abraham Lincoln", "Gandalf"]
         for name in names:
+            patient = Patient(name)
+            patient.objectives = {
+                "objective 1": "Destroy the jedi.",
+                "objective 2": "Crush the rebellion.",
+                "objective 3": "Make Luke my apprentice.",
+            }
             patients.append(Patient(name))
 
         response = Utilities.upload_patients(patients)

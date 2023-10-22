@@ -76,10 +76,11 @@ def gene_selection_driver(
     else:
         # patient data complete, add them to patients
         # TODO: when editing existing patient, handle existing names and genes.
-
-        print("Adding a patient is not yet implemented.")
-        print(patient.genes)
-        sys.exit()
+        json_patient_data = Utilities.retrieve_json_patient_data()
+        patients = convert_json_data_to_patients(json_patient_data)
+        patients.append(patient)
+        Utilities.upload_patients(patients)
+        home_window(True, True)
 
 
 def create_name_widget(window: Window):

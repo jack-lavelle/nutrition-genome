@@ -21,12 +21,7 @@ class Patient:
         self, name=None, genes=Utilities.generate_genes(), objectives=None
     ) -> None:
         self.name = name
-        if not objectives:
-            self.objectives = {
-                "objective 1": "Destroy the jedi.",
-                "objective 2": "Crush the rebellion.",
-                "objective 3": "Make Luke my apprentice.",
-            }
+        self.objectives = objectives
         self.genes = genes
 
     def add_report(self, date):
