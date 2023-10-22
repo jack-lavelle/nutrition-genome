@@ -15,15 +15,19 @@ class Patient:
     name = None
     reportsDict = {}
     genes = {}
-    objectives = []
+    objectives = {}
 
-    def __init__(self, name=None, genes=None, objectives=None) -> None:
+    def __init__(
+        self, name=None, genes=Utilities.generate_genes(), objectives=None
+    ) -> None:
         self.name = name
-        self.objectives = objectives
-        if not genes:
-            self.genes = Utilities.generate_genes()
-        else:
-            self.genes = genes
+        if not objectives:
+            self.objectives = {
+                "objective 1": "Destroy the jedi.",
+                "objective 2": "Crush the rebellion.",
+                "objective 3": "Make Luke my apprentice.",
+            }
+        self.genes = genes
 
     def add_report(self, date):
         pass

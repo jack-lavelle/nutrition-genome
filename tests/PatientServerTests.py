@@ -8,8 +8,10 @@ import json
 import requests
 import unittest
 
-import Patient
+from Patient import Patient, convert_json_data_to_patients
 import Utilities
+
+# TODO: add delete patient data button
 
 
 class Tests(unittest.TestCase):
@@ -18,7 +20,7 @@ class Tests(unittest.TestCase):
         # TODO: store patients by uuid
         names = ["George Washington", "Abraham Lincoln", "Gandalf"]
         for name in names:
-            data[name] = Patient.Patient(name)
+            data[name] = Patient(name)
 
         data["key"] = "dyqIDK3amOB09U4PSmSDW5FaZiFMNyoCTlmQESTBzh8="
         response = requests.post(
@@ -31,9 +33,9 @@ class Tests(unittest.TestCase):
 
     def test_download_patients(self):
         json_patient_data = Utilities.retrieve_json_patient_data()
-        patients = Patient.convert_json_data_to_patients(json_patient_data)
+        patients = convert_json_data_to_patients(json_patient_data)
 
-        self.assertEqual(type(patients[0]), Patient.Patient)
+        self.assertEqual(type(patients[0]), Patient)
 
 
 if __name__ == "__main__":
