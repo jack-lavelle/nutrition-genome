@@ -12,7 +12,9 @@ class MyEncoder(JSONEncoder):
 
 @staticmethod
 # TODO: refactor this ... rename to `download_patients`, set typing more accurately, etc
-def retrieve_json_patient_data():
+def download_patients() -> list:
+    from Patient import Patient
+
     # TODO: could not connect to the server
     json_key = {"key": "dyqIDK3amOB09U4PSmSDW5FaZiFMNyoCTlmQESTBzh8="}
     response = requests.get(
@@ -21,7 +23,13 @@ def retrieve_json_patient_data():
     json_patient_data = json.loads(response.json()["data"])
     json_patient_data.pop("key")
 
-    return json_patient_data
+    patients = []
+    for name in json_patient_data:
+        patient_data = json_patient_data[name]
+        genes = patient_data["genes"]
+        patients.append(Patient(name, genes))
+
+    return patients
 
 
 @staticmethod
@@ -42,6 +50,21 @@ def upload_patients(patients: list) -> Response:
 
 
 @staticmethod
+def delete_patient(name: str) -> bool:
+    patients = download_patients()
+    patients_dict = {}
+    for patient in patients:
+        patients_dict[patient.name] = patient
+
+    patients_dict.pop(name)
+    updated_patients = []
+    for patient in patients_dict.items():
+        updated_patients.append(patient[1])
+    upload_patients(updated_patients)
+    return True
+
+
+@staticmethod
 def load_master_data() -> dict:
     with open("gene_master_data.json", "r", encoding="utf-8") as file:
         Utilities.gene_master_data = json.load(file)
@@ -49,34 +72,26 @@ def load_master_data() -> dict:
     return Utilities.gene_master_data
 
 
+@staticmethod
+def generate_section_genes(section_title: str) -> list:
+    if not section_title:
+        section_title = None
+
+    if not Utilities.gene_master_data:
+        load_master_data()
+
+    genes_random_sample = []
+    while len(genes_random_sample) == 0:
+        genes_random_sample = random.sample(
+            sorted(Utilities.gene_master_data[section_title]),
+            k=random.randint(0, len(Utilities.gene_master_data[section_title])),
+        )
+    return genes_random_sample
+
+
 class Utilities:
     all_genes = []
     gene_master_data = {}
-
-    @staticmethod
-    def generate_genes():
-        genes = {}
-
-        for gene_section in load_master_data().keys():
-            genes[gene_section] = Utilities.generate_section_genes(gene_section)
-
-        return genes
-
-    @staticmethod
-    def generate_section_genes(section_title: str) -> list:
-        if not section_title:
-            section_title = None
-
-        if not Utilities.gene_master_data:
-            load_master_data()
-
-        genes_random_sample = []
-        while len(genes_random_sample) == 0:
-            genes_random_sample = random.sample(
-                sorted(Utilities.gene_master_data[section_title]),
-                k=random.randint(0, len(Utilities.gene_master_data[section_title])),
-            )
-        return genes_random_sample
 
     @staticmethod
     def get_gene_master_data() -> dict:

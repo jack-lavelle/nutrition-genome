@@ -1,4 +1,4 @@
-from Utilities import Utilities
+import PatientUtilities
 
 
 class Patient:
@@ -18,7 +18,7 @@ class Patient:
     objectives = {}
 
     def __init__(
-        self, name=None, genes=Utilities.generate_genes(), objectives=None
+        self, name=None, genes=PatientUtilities.generate_genes(), objectives=None
     ) -> None:
         self.name = name
         self.objectives = objectives
@@ -26,14 +26,3 @@ class Patient:
 
     def add_report(self, date):
         pass
-
-
-@staticmethod
-def convert_json_data_to_patients(json_patient_data: dict):
-    patients = []
-    for name in json_patient_data:
-        patient_data = json_patient_data[name]
-        genes = patient_data["genes"]
-        patients.append(Patient(name, genes))
-
-    return patients

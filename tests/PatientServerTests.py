@@ -5,7 +5,7 @@ import os
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../../nutrition-genome")
 import unittest
 
-from Patient import Patient, convert_json_data_to_patients
+from Patient import Patient
 import Utilities
 
 # TODO: add delete patient data button
@@ -31,10 +31,14 @@ class Tests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_download_patients(self):
-        json_patient_data = Utilities.retrieve_json_patient_data()
-        patients = convert_json_data_to_patients(json_patient_data)
+        patients = Utilities.download_patients()
 
         self.assertEqual(type(patients[0]), Patient)
+
+    def test_delete_patient(self):
+        Utilities.delete_patient("George Washington")
+        patients = Utilities.download_patients()
+        self.assertNotIn("George Washington", patients)
 
 
 if __name__ == "__main__":

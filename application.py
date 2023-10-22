@@ -3,10 +3,8 @@ import sys
 from tkinter import ttk, Widget
 from functools import partial
 from Window import Window
-from Patient import Patient, convert_json_data_to_patients
+from Patient import Patient
 import Utilities
-import string
-from WrappedWidgets import WrappedWidgets
 
 
 # Screens: 1 - welcome: add new patient, view current patients
@@ -76,8 +74,7 @@ def gene_selection_driver(
     else:
         # patient data complete, add them to patients
         # TODO: when editing existing patient, handle existing names and genes.
-        json_patient_data = Utilities.retrieve_json_patient_data()
-        patients = convert_json_data_to_patients(json_patient_data)
+        patients = Utilities.download_patients()
         patients.append(patient)
         Utilities.upload_patients(patients)
         home_window(True, True)
@@ -277,8 +274,7 @@ def handle_button_click(name, window, checkboxes):
 
 
 def get_selected_patient(window: Window, patient_name: str):
-    json_patient_data = Utilities.retrieve_json_patient_data()
-    patients = convert_json_data_to_patients(json_patient_data)
+    patients = Utilities.download_patients()
     patients_dict = {}
     for patient in patients:
         patients_dict[patient.name] = patient
@@ -287,8 +283,7 @@ def get_selected_patient(window: Window, patient_name: str):
 
 
 def view_patients(window: Window):
-    json_patient_data = Utilities.retrieve_json_patient_data()
-    patients = convert_json_data_to_patients(json_patient_data)
+    patients = Utilities.download_patients()
 
     window.window.destroy()
     second_window = Window("View Patients")
@@ -317,23 +312,30 @@ def view_patients(window: Window):
 def view_patient_window(window: Window, patient: Patient):
     window.window.destroy()
     second_window = Window("View Patient")
-    entry = tk.Entry(second_window.window, fg="black")
-
-    entry.insert(0, patient.name)
+    entry = tk.Label(second_window.window, text=patient.name, fg="black")
     entry.config(fg="black")
     entry.pack()
 
-    total_checkboxes = {}
-    print("~~ ERROR ~~ NOT YET IMPLEMENTED")
-    sys.exit()
-    total_checkboxes = add_new_patient_window({}, second_window, total_checkboxes)
-
-    button = ttk.Button(
+    update_button = ttk.Button(
         second_window.window,
-        text="Update Patient",
-        command=partial(add_patient_action, second_window, entry, total_checkboxes),
+        text="Update Patient Information",
+        command=partial(add_patient_action, second_window),
     )
-    button.pack()
+    update_button.pack()
+
+    create_report_button = ttk.Button(
+        second_window.window,
+        text="Create Report",
+        command=partial(add_patient_action, second_window),
+    )
+    create_report_button.pack()
+
+    delete_patient_button = ttk.Button(
+        second_window.window,
+        text="Delete Patient",
+        command=partial(add_patient_action, second_window),
+    )
+    delete_patient_button.pack()
 
     return_home_button = ttk.Button(
         second_window.window,
@@ -342,7 +344,6 @@ def view_patient_window(window: Window, patient: Patient):
     )
     return_home_button.pack()
 
-    second_window.resize_window()
     second_window.window.focus_force()
     second_window.window.mainloop()
 
