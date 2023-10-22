@@ -1,6 +1,7 @@
 import random
 import json
 import requests
+from requests import Response
 from json import JSONEncoder
 
 
@@ -10,6 +11,7 @@ class MyEncoder(JSONEncoder):
 
 
 @staticmethod
+# TODO: refactor this ... rename to `download_patients`, set typing more accurately, etc
 def retrieve_json_patient_data():
     # TODO: could not connect to the server
     json_key = {"key": "dyqIDK3amOB09U4PSmSDW5FaZiFMNyoCTlmQESTBzh8="}
@@ -20,6 +22,23 @@ def retrieve_json_patient_data():
     json_patient_data.pop("key")
 
     return json_patient_data
+
+
+@staticmethod
+# TODO patients should be `dict[str, Patient]` not a list
+def upload_patients(patients: list) -> Response:
+    data = {}
+    for patient in patients:
+        data[patient.name] = patient
+
+    data["key"] = "dyqIDK3amOB09U4PSmSDW5FaZiFMNyoCTlmQESTBzh8="
+
+    # TODO: handle this failing
+    return requests.post(
+        "http://127.0.0.1:5000/save",
+        json=json.dumps(data, cls=MyEncoder),
+        timeout=30,
+    )
 
 
 @staticmethod

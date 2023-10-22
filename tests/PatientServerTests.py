@@ -3,32 +3,25 @@ import os
 
 # TODO: rework all paths to be operating system agnostic
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../../nutrition-genome")
-
-import json
-import requests
 import unittest
 
 from Patient import Patient, convert_json_data_to_patients
 import Utilities
 
 # TODO: add delete patient data button
+# TODO: handle empty data
 
 
 class Tests(unittest.TestCase):
-    def test_upload_data(self):
-        data = {}
+    def test_upload_patients(self):
+        patients = []
+
         # TODO: store patients by uuid
         names = ["George Washington", "Abraham Lincoln", "Gandalf"]
         for name in names:
-            data[name] = Patient(name)
+            patients.append(Patient(name))
 
-        data["key"] = "dyqIDK3amOB09U4PSmSDW5FaZiFMNyoCTlmQESTBzh8="
-        response = requests.post(
-            "http://127.0.0.1:5000/save",
-            json=json.dumps(data, cls=Utilities.MyEncoder),
-            timeout=30,
-        )
-
+        response = Utilities.upload_patients(patients)
         self.assertEqual(response.status_code, 200)
 
     def test_download_patients(self):
