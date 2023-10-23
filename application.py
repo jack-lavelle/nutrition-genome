@@ -4,19 +4,15 @@ from tkinter import ttk, Widget
 from functools import partial
 from Window import Window
 from Patient import Patient
+from CreateReport import create_pdf
 import Utilities
 
 
-# Screens: 1 - welcome: add new patient, view current patients
-def add_green_text(window: Window = None):
-    label = tk.Label(window.window, text="")
-    label.pack()
-    message = "New patient successfully added."
-    label.config(text=message, fg="green")
-
-
 def home_window(
-    first_visit: bool = False, patient_added: bool = False, window: Window = None
+    first_visit: bool = False,
+    patient_added: bool = False,
+    patient_deleted: bool = False,
+    window: Window = None,
 ):
     if not first_visit:
         window.window.destroy()
@@ -25,6 +21,11 @@ def home_window(
 
     if patient_added:
         message = "New patient successfully added."
+        label = tk.Label(root_window.window, text=message, fg="green")
+        label.pack()
+
+    if patient_deleted:
+        message = "Patient successfully deleted."
         label = tk.Label(root_window.window, text=message, fg="green")
         label.pack()
 
@@ -77,7 +78,7 @@ def gene_selection_driver(
         patients = Utilities.download_patients()
         patients.append(patient)
         Utilities.upload_patients(patients)
-        home_window(True, True)
+        home_window(True, True, False)
 
 
 def create_name_widget(window: Window):
@@ -279,7 +280,7 @@ def get_selected_patient(window: Window, patient_name: str):
     for patient in patients:
         patients_dict[patient.name] = patient
 
-    view_patient_window(window, patients_dict[patient_name.get()])
+    view_patient_window(window, patients_dict[patient_name.get()], False)
 
 
 def view_patients(window: Window):
@@ -309,31 +310,37 @@ def view_patients(window: Window):
     second_window.window.mainloop()
 
 
-def view_patient_window(window: Window, patient: Patient):
+def view_patient_window(window: Window, patient: Patient, report_created: bool):
     window.window.destroy()
     second_window = Window("View Patient")
     entry = tk.Label(second_window.window, text=patient.name, fg="black")
     entry.config(fg="black")
     entry.pack()
 
-    update_button = ttk.Button(
-        second_window.window,
-        text="Update Patient Information",
-        command=partial(add_patient_action, second_window),
-    )
-    update_button.pack()
+    if report_created:
+        message = "New patient report successfully generated at PATH."
+        label = tk.Label(second_window.window, text=message, fg="green")
+        label.pack()
+
+    # TODO: add ability to edit existing patient.
+    # update_button = ttk.Button(
+    #     second_window.window,
+    #     text="Update Patient Information",
+    #     command=partial(initial_gene_selection_driver, second_window, patient),
+    # )
+    # update_button.pack()
 
     create_report_button = ttk.Button(
         second_window.window,
         text="Create Report",
-        command=partial(add_patient_action, second_window),
+        command=partial(handle_create_pdf, second_window, patient),
     )
     create_report_button.pack()
 
     delete_patient_button = ttk.Button(
         second_window.window,
         text="Delete Patient",
-        command=partial(add_patient_action, second_window),
+        command=partial(handle_delete_patient, second_window, patient),
     )
     delete_patient_button.pack()
 
@@ -348,8 +355,19 @@ def view_patient_window(window: Window, patient: Patient):
     second_window.window.mainloop()
 
 
+def handle_create_pdf(window: Window, patient: Patient):
+    create_pdf(patient)
+    view_patient_window(window, patient, True)
+
+
+def handle_delete_patient(window: Window, patient: Patient):
+    window.window.destroy()
+    Utilities.delete_patient(patient.name)
+    home_window(True, False, True)
+
+
 def return_home(original_window: Window):
-    home_window(False, False, original_window)
+    home_window(False, False, False, original_window)
 
 
 def create_dropdown_menu(window: Window, title: str, options: list):

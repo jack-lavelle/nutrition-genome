@@ -26,7 +26,7 @@ selected_styles = {
 
 def create_pdf(patient: Patient):
     # Create a new PDF file
-    output_pdf = "output.pdf"
+    output_pdf = patient.name + ".pdf"
     doc = SimpleDocTemplate(output_pdf, pagesize=letter)
 
     # Define the content

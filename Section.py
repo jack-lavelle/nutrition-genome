@@ -1,5 +1,5 @@
 import random
-from Utilities import Utilities, load_master_data
+from Utilities import Utilities, load_master_data, generate_section_genes
 
 
 class Section:
@@ -17,7 +17,7 @@ class Section:
 
     def set_content(self, genes: list):
         if not self.genes:
-            self.genes = Utilities.generate_section_genes(self.section_title)
+            self.genes = generate_section_genes(self.section_title)
         else:
             self.genes = genes
 

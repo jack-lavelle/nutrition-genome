@@ -642,6 +642,91 @@
         ]
       },
       "Avoid": []
+    },
+
+    "ACTN3": {
+      "Significance": "Fewer type 2 fast twitch. Higher muscle damage",
+      "Include": {
+        "Lifestyle": [
+          "More rest days",
+          "Cold therapy post-workout",
+          "Hamstring and ankle strengthening"
+        ]
+      },
+      "Avoid": ["Heavy training without enough recovery days"]
+    },
+    "COL1A1 Wild Type": {
+      "Significance": "Slower collagen repair / turnover. Poor processing capacity of betablockers, antidepressants, and opioids. Lower Vo2Max (tissue oxygenation)",
+      "Lifestyle": ["Cryotherapy"],
+      "Supplements": [
+        "Vitamin C and B6",
+        "Zinc, Copper",
+        "Glycine, proline, lysine",
+        "Ashwagandha",
+        "Eluethero root - Adapten-All supplement contains both",
+        "Cold exposure"
+      ]
+    },
+    "COQ2": {
+      "Significance": "Associated with statin-induced myopathy",
+      "Include": {
+        "Supplements": ["CoQ10"]
+      },
+      "Avoid": ["Statins"]
+    },
+    "DHFR": {
+      "Significance": "Associated with Folic acid sensitivity. Decreased gene repair function",
+      "Include": {
+        "Supplements": ["Methyl folate"]
+      },
+      "Avoid": ["Folic acid"]
+    },
+    "F5": {
+      "Significance": "Increased incidence of blood clots",
+      "Include": {
+        "Supplements": [
+          "Vitamin E supplement",
+          "Omega-3s (natural anticoagulant)"
+        ]
+      },
+      "Avoid": ["Avoid NuvaRing and OCPs"]
+    },
+    "PPARGC1A": {
+      "Significance": "Associated with lower VO2 Max-poor tissue oxygenation, lower life-span",
+      "Include": {
+        "Lifestyle": ["Cold exposure"],
+        "Supplements": ["Ashwagandha", "Eluethero root"]
+      }
+    },
+
+    "SCL23A1": {
+      "Significance": "Associated with higher Vitamin C requirements for collagen formation and recovery",
+      "Include": {
+        "Supplements": ["Vitamin C supplement"]
+      },
+      "Avoid": [
+        "Minimize smoking, excess alcohol",
+        "Sugar",
+        "Antibiotics",
+        "Cortisone, aspirin",
+        "Environmental toxins",
+        "Heavy metals",
+        "Chemotherapy"
+      ]
+    },
+    "SIRT1": {
+      "Significance": "Reduced genetic repair",
+      "Include": {
+        "Lifestyle": ["Regular exercise", "Weight loss"],
+        "Supplements": ["NAD supplement"]
+      }
+    },
+    "CYPR21": {
+      "Significance": "Associated with Vitamin D deficiency linked to muscle weakness, suboptimal muscle function, and stress fractures",
+      "Include": {
+        "Lifestyle": ["Keep vitamin D levels between 60-80"],
+        "Supplements": ["Vitamin D"]
+      }
     }
   },
   "General Inflammation": {
@@ -717,6 +802,89 @@
         ]
       },
       "Avoid": []
+    },
+    "ABCG2": {
+      "Significance": "Poor uric acid processing: Associated with higher risk for gout",
+      "Include": {
+        "Lifestyle": ["Hydration, Cold Immersion"],
+        "Nutrients": [
+          "Bioflavonoids, anthocyanins, flavonoids, olive oil, vitamin C"
+        ],
+        "Supplements": ["Vitamin C"]
+      },
+      "Avoid": [
+        "Minimize sugar, high fructose corn syrup, dehydration, high lead levels"
+      ]
+    },
+    "APB1 (DAO)": {
+      "Significance": "Excessive histamine release- poor gut histamine breakdown. Associated with histamine-related digestive disorders, nasal congestion, headaches, anxiety, arrhythmia, HTN, diarrhea, urticaria, and migraines.",
+      "Include": {
+        "Nutrients": [
+          "Vitamin C",
+          "Choline",
+          "Folate",
+          "Chamomile tea",
+          "Basil",
+          "Echinacea tea",
+          "Fennel, ginger, wild oregano"
+        ],
+        "Supplements": [
+          "Magnesium",
+          "Stinging nettle and Vitamin C (D-Hist supplement)"
+        ]
+      },
+      "Avoid": [
+        "NSAIDs",
+        "Aged foods/drink",
+        "Poor gut flora",
+        "Antidepressants",
+        "H2 blockers",
+        "Antihistamines",
+        "Antiarrhythmics"
+      ]
+    },
+    "CBS (B6)": {
+      "Significance": "Associated with elevated Ulcerative colitis, Alzheimer’s, cardiovascular inflammation",
+      "Include": {
+        "Supplements": ["B6"]
+      },
+      "Avoid": [
+        "Minimize antibiotics",
+        "BCP",
+        "ACE inhibitors",
+        "Antacids",
+        "PPI",
+        "Hormone replacement therapy",
+        "Estradiol",
+        "MAO inhibitors",
+        "St. John’s Wort"
+      ]
+    },
+    "GPX1": {
+      "Significance": "Lower glutathione- lower protection against oxidative stress of mitochondria",
+      "Include": {
+        "Lifestyle": [
+          "HIIT training",
+          "Optimal testosterone and estrogen levels",
+          "Cold exposure"
+        ],
+        "Nutrients": ["Herbs, spices"],
+        "Supplements": ["Melatonin", "Vitamin C and Vitamin E"]
+      }
+    },
+    "HFE": {
+      "Significance": "Associated with hemochromatosis",
+      "Include": {
+        "Lifestyle": ["Cold therapy"],
+        "Nutrients": ["Low iron diet"]
+      },
+      "Avoid": ["Vitamin C with meals", "Alcohol with meals"]
+    },
+    "IL6 Wild Type": {
+      "Significance": "Targets muscle inflammation and accelerated muscle breakdown",
+      "Include": {
+        "Supplements": ["Whey protein"]
+      }
     }
   },
   "Inflammation and Cancer": {
@@ -781,6 +949,351 @@
         "Supplements": ["Curcumin"]
       },
       "Avoid": ["Smoking"]
+    },
+    "CYP3A4": {
+      "Significance": "Estrogen metabolism. Associated with prostate cancer",
+      "Include": {
+        "Lifestyle": ["Infrared sauna", "Meditation"],
+        "Nutrients": ["Cruciferous vegetables"],
+        "Supplements": [
+          "FemGuard plus Balance supplement",
+          "CDG estrodim supplement"
+        ]
+      },
+      "Avoid": [
+        "Minimize drugs that inhibit CYP3A4 and grapefruit juice combinations"
+      ]
+    },
+    "ADIPOQ": {
+      "Significance": "Higher risk of colon cancer / breast cancer (women)",
+      "Include": {
+        "Lifestyle": ["Swimming 4x/week"],
+        "Nutrients": [
+          "Coffee",
+          "Blueberries, mulberries, cranberries",
+          "Raw almonds, strawberries",
+          "Chili peppers, and ginger, rose hips",
+          "Omega 3"
+        ],
+        "Supplements": [
+          "Curcumin",
+          "Berberine",
+          "Fish oil",
+          "750mg Ginger",
+          "Rose hip extract (1mg)"
+        ]
+      },
+      "Avoid": ["Avoid red meat and processed meat"]
+    },
+    "CAT": {
+      "Significance": "Impaired reduction of oxidative stress (inflammation in the cell). Highest correlation to prostate, breast, liver, and blood cancer.",
+      "Include": {
+        "Lifestyle": [
+          "Deep breathing relaxation techniques (yoga, meditation, prayer) to assist catalase",
+          "Monitoring iron levels"
+        ],
+        "Nutrients": [
+          "Higher need for flavonoids",
+          "Ginger, cumin, anise, fennel, caraway, cardamom"
+        ],
+        "Supplements": [
+          "Lion’s Mane mushroom",
+          "Boron",
+          "Lutein",
+          "Holy basil",
+          "Selenium"
+        ]
+      },
+      "Avoid": ["Minimize oxidative stress", "BPA plastic"]
+    },
+    "CYP181 L432V Men": {
+      "Significance": "Associated with elevated 4-hydroxyestradiol, potentially cancerous growth in the prostate.",
+      "Include": {
+        "Nutrients": ["Rooibos tea", "Celery", "Parsley"],
+        "Supplements": ["Quercetin", "Resveratrol"]
+      },
+      "Avoid": [
+        "Dioxins",
+        "OCPs, cigarette smoke",
+        "Burning coal and vegetable oils"
+      ]
+    },
+    "CYP181 L432V Women": {
+      "Significance": "Associated with elevated 4-hydroxyestradiol, potentially cancerous growth in the breast.",
+      "Include": {
+        "Nutrients": ["Rooibos tea", "Celery", "Parsley"],
+        "Supplements": ["Quercetin", "Resveratrol"]
+      },
+      "Avoid": [
+        "Dioxins",
+        "OCPs, cigarette smoke",
+        "Burning coal and vegetable oils"
+      ]
+    },
+    "CYP1A1 Men": {
+      "Significance": "Associated with prostate cancer and lung cancer.",
+      "Include": {
+        "Nutrients": ["Iodine", "Green tea"],
+        "Supplements": ["Resveratrol"]
+      },
+      "Avoid": ["Minimize cigarettes, burning coal, and vegetable oils"]
+    },
+    "CYP1A1 Women": {
+      "Significance": "Associated with breast cancer and lung cancer.",
+      "Include": {
+        "Nutrients": ["Iodine", "Green tea"],
+        "Supplements": ["Resveratrol"]
+      },
+      "Avoid": ["Minimize cigarettes, burning coal, and vegetable oils"]
+    },
+    "CYP1A2 Women": {
+      "Significance": "Determines if an individual is a slow or intermediate metabolizer of caffeine.",
+      "Lifestyle": [
+        "Oral contraceptives prolong caffeine half-life (6.2 hours to 10.7 hours)",
+        "Elevated fasting blood sugar from caffeine",
+        "Over 4 cups of coffee may lower bone density in males",
+        "Increased risk of nonfatal heart attacks",
+        "Protective with BRCA variants",
+        "Improved performance with caffeine for long duration events"
+      ],
+      "Avoid": ["OCPs"]
+    },
+    "CYP1A2 wild/ heterozygous: Men": {
+      "Significance": "Determines if an individual is a slow or intermediate metabolizer of caffeine.",
+      "Lifestyle": [
+        "Elevated fasting blood sugar from caffeine",
+        "Over 4 cups of coffee may lower bone density in males",
+        "Increased risk of nonfatal heart attacks",
+        "Improved performance with caffeine for long-duration events"
+      ]
+    },
+    "CYP1A2 MEN Fast: homozygous": {
+      "Significance": "Coffee is more protective against prostate cancer with increased survival.",
+      "Associated with": "Improved performance with caffeine for events under 1 hour",
+      "Avoid": "Minimize charred and fried meat, dioxins, nitrates"
+    },
+    "CYP1A2 Women Fast: homozygous": {
+      "Significance": "Coffee is more protective against ER-positive breast cancer with increased survival.",
+      "Associated with": "Improved performance with caffeine for events under 1 hour",
+      "Avoid": "Minimize charred and fried meat, dioxins, nitrates"
+    },
+    "CYP1B1 L432V wild type Women": {
+      "Significance": "Elevated 4-hydroxyestradiol, potentially cancerous growth for the breast and prostate",
+      "Include": {
+        "Nutrients": "Rooibos tea, Celery, parsley",
+        "Supplements": "Quercetin, resveratrol"
+      },
+      "Avoid": "Minimize high dose biotin, dioxins"
+    },
+    "CYP1B1 L432V wild type Men": {
+      "Significance": "Elevated 4-hydroxyestradiol, potentially cancerous growth for prostate",
+      "Include": {
+        "Nutrients": "Rooibos tea, Celery, parsley",
+        "Supplements": "Quercetin, resveratrol"
+      },
+      "Avoid": "Minimize high dose biotin, dioxins"
+    },
+    "CYP2C19 heterozygous/homozygous": {
+      "Significance": "Lower overall estrogen due to fast break down, lower ER positive breast cancer"
+    },
+    "DI01 Wild Type": {
+      "Significance": "Associated with higher conversion of T4 to T3, hyperthyroid. Associated with pre-eclampsia, lung cancer, breast cancer, glioblastoma, and blood clots.",
+      "Include": {
+        "Supplements": "Zinc, Selenium"
+      },
+      "Avoid": "Organochlorine pesticides"
+    },
+    "FADS2, hetero/homozygous Men": {
+      "Significance": "Omega-3 Fatty Acids processing. Low levels are associated with prostate cancer.",
+      "Include": {
+        "Nutrients": "Animal based EPA and DHA, Omega-3 fatty acids",
+        "Supplements": "Fish oil"
+      },
+      "Avoid": "High Omega 6"
+    },
+    "FADS2, hetero/homozygous Women": {
+      "Significance": "Omega-3 Fatty Acids processing. Low levels are associated with breast cancer.",
+      "Include": {
+        "Nutrients": "Animal-based EPA and DHA, Omega-3 fatty acids",
+        "Supplements": "Fish oil"
+      },
+      "Avoid": "High Omega-6"
+    },
+    "GATA3 Heter/homozygous": {
+      "Significance": "Associated with lower first line of defense immune T cell production and tumor suppressor gene. Related to colon cancer for those eating processed meat compared to those with a normal genotype.",
+      "Avoid": "Processed meat"
+    },
+    "GSTM1 Wild Type (Null)": {
+      "Significance": "High frequencies in patients with lung cancer, breast cancer, bladder cancer, colorectal cancer, skin cancer.",
+      "Include": {
+        "Nutrients": ["Cruciferous vegetables", "Green tea and white tea"],
+        "Supplements": ["Vitamin C, A, and E", "Resveratrol", "Curcumin"]
+      },
+      "Avoid": [
+        "Smoking",
+        "Burning wood or trash",
+        "Asphalt",
+        "Coal",
+        "Diesel exhaust",
+        "Gas cooking",
+        "Dioxins",
+        "Grilled or charred meat"
+      ]
+    },
+    "GSTP1 rs1695 Homozygous MEN": {
+      "Significance": "Associated with prostate, urinary, esophagus, and skin cancer.",
+      "Include": {
+        "Supplements": [
+          "Glutathione precursors",
+          "Holy Basil",
+          "Alpha Lipoic Acid",
+          "Vitamin C",
+          "Vitamin E",
+          "Magnesium"
+        ]
+      },
+      "Avoid": ["Glyphosates", "High mercury and cadmium levels"]
+    },
+    "GSTP1 rs1695 Homozygous Women": {
+      "Significance": "Associated with breast, urinary, esophagus, and skin cancer.",
+      "Include": {
+        "Supplements": [
+          "Glutathione precursors",
+          "Holy Basil",
+          "Alpha Lipoic Acid",
+          "Vitamin C",
+          "Vitamin E",
+          "Magnesium"
+        ]
+      },
+      "Avoid": ["Glyphosates", "High mercury and cadmium levels"]
+    },
+    "MLH1 Homozygous": {
+      "Significance": "Associated with colon cancer, endometrial cancer, glioblastoma, and lung cancer.",
+      "Include": {
+        "Nutrients": "Diet rich in antioxidants and vitamins (especially folate).",
+        "Supplements": "Methylfolate"
+      },
+      "Avoid": [
+        "Minimize high fructose corn syrup",
+        "Artificial sweeteners",
+        "MSG",
+        "Caramel coloring and other food dyes",
+        "Phosphoric acid",
+        "Sodas",
+        "Sugar",
+        "White flour",
+        "Corn oil"
+      ]
+    },
+    "MTR/MTRR Homozygous": {
+      "Significance": "Generally associated with cancer.",
+      "Include": {
+        "Supplements": ["Betaine", "Choline", "B6", "B12", "Folate"]
+      },
+      "Avoid": [
+        "Minimize excess alcohol",
+        "Excess sugar",
+        "Anesthesia",
+        "Birth control",
+        "Heavy metals",
+        "Antacids",
+        "Antibiotics",
+        "Proton pump inhibitors",
+        "Metformin",
+        "Anticonvulsants",
+        "Psychiatric medications",
+        "Yeast overgrowth"
+      ]
+    },
+    "NAT2 Homozygous (Men)": {
+      "Significance": "Poor clearance of carcinogens from smoke. Associated with breast, bladder, and prostate cancer.",
+      "Include": {
+        "Nutrition": [
+          "Cruciferous Vegetables",
+          "Unfiltered fermented drinks",
+          "Meat and fish marinades",
+          "Parsley"
+        ],
+        "Supplements": ["Vitamin C"]
+      },
+      "Avoid": [
+        "Smoking",
+        "Commercial hair dyes",
+        "Industrial and manufacturing plants",
+        "Charred meat",
+        "Diesel exhaust"
+      ]
+    },
+    "NAT2 Homozygous (Women)": {
+      "Significance": "Poor clearance of carcinogens from smoke. Associated with breast and bladder cancer.",
+      "Include": {
+        "Nutrition": [
+          "Cruciferous Vegetables",
+          "Unfiltered fermented drinks",
+          "Meat and fish marinades",
+          "Parsley"
+        ],
+        "Supplements": ["Vitamin C"]
+      },
+      "Avoid": [
+        "Smoking",
+        "Commercial hair dyes",
+        "Industrial and manufacturing plants",
+        "Charred meat",
+        "Diesel exhaust"
+      ]
+    },
+    "SOD2 Homozygous": {
+      "Significance": "Associated with aggressive prostate cancer.",
+      "Include": {
+        "Lifestyle": ["Cryotherapy", "Reverse osmosis water filters"],
+        "Nutrients": [
+          "Red fruit and vegetables",
+          "Lutein, Zeaxanthin, Carotenoids"
+        ],
+        "Supplements": [
+          "Manganese",
+          "Vitamin A, C, + E",
+          "Omega-3 Fatty Acids",
+          "Cordyceps",
+          "Reishi (help protect mitochondria)",
+          "Boron",
+          "Holy Basil"
+        ]
+      },
+      "Avoid": [
+        "Minimize low lycopene intake",
+        "Heavy training without enough recovery days"
+      ]
+    },
+    "TMPRSS2 Homozygous": {
+      "Significance": "Associated with prostate cancer.",
+      "Include": {
+        "Nutrients": [
+          "Lycopene (red fruits and vegetables)",
+          "Phytoestrogens (soybeans, tofu, tempeh, soy beverages, etc.)"
+        ]
+      },
+      "Supplements": ["Curcumin"],
+      "Avoid": ["Smoking"]
+    },
+    "TP53 Homo/Heterozygous": {
+      "Significance": "Tumor suppression gene suppression.",
+      "Include": {
+        "Supplements": ["Vitamin C", "Niacin", "Reishi", "Zinc", "Selenium"]
+      },
+      "Avoid": ["Excessive sun exposure in females"]
+    },
+    "VOKRC1*2 Homo/Heterozygous": {
+      "Significance": "Breast cancer risk.",
+      "Include": {
+        "Nutrients": [
+          "Vitamin K2 MK4 from pastured eggs, grass-fed butter, meat, and numerous cheeses."
+        ],
+        "Supplements": ["Vitamin K2 MK4"]
+      },
+      "Avoid": ["Minimize long-term use of anticoagulants and statin drugs"]
     }
   },
   "Cholesterol / Glucose Management": {
@@ -822,6 +1335,134 @@
         "Supplements": []
       },
       "Avoid": []
+    },
+    "ADIPOQ Hetero/Homozygous": {
+      "Significance": "Higher levels of obesity and insulin resistance.",
+      "Include": {
+        "Nutrients": [
+          "Coffee",
+          "Blueberries",
+          "Mulberries",
+          "Cranberries",
+          "Raw almonds",
+          "Strawberries",
+          "Chili peppers",
+          "Ginger",
+          "Rose hips"
+        ],
+        "Supplements": ["Curcumin", "Berberine"]
+      },
+      "Avoid": ["Avoid red meat and processed meat"]
+    },
+    "FTO Homozygous": {
+      "Significance": "Associated with overeating and obesity, especially from saturated fat intake.",
+      "Include": {
+        "Lifestyle": [
+          "Get 7-8 hours of sleep per night",
+          "Engage in high-intensity or >1-hour aerobic exercise"
+        ],
+        "Nutrients": [
+          "For breakfast, opt for a combination of protein and fiber-rich carbohydrates, especially prebiotic fiber, as it's effective at suppressing ghrelin levels throughout the day",
+          "Include prebiotic fiber and bifidobacterial in your diet",
+          "If prone to overeating and abdominal weight gain, decrease saturated fat intake and increase polyunsaturated fat intake"
+        ],
+        "Supplements": ["Vitamin D"]
+      },
+      "Avoid": [
+        "Minimize poor sleep",
+        "Avoid refined carbohydrate breakfast",
+        "Minimize high saturated fat intake"
+      ]
+    },
+    "LP(a) Homo/heterozygous": {
+      "Significance": "This genetic variant increases plaque growth and formation in the arteries.",
+      "Include": {
+        "Supplements": ["L-Carnitine", "Niacin"]
+      }
+    },
+    "PPAR-Alpha, homo/heterozygous": {
+      "Significance": "This genetic variant can alter fatty acid metabolism, leading to changes in lipid metabolism.",
+      "Include": {
+        "Nutrients": [
+          "Increasing poly and monounsaturated fats",
+          "Astaxanthin",
+          "Pterostilbene",
+          "Genistein",
+          "Tomatoes",
+          "Cinnamon",
+          "Gynostemma tea"
+        ],
+        "Supplements": [
+          "PPAR-Alpha agonist drugs",
+          "Lion’s Mane mushroom",
+          "L-carnitine",
+          "Zinc"
+        ]
+      },
+      "Avoid": "Saturated fat"
+    },
+    "SHBG rs, women, homo/heterozygous": {
+      "Significance": "This genetic variant can alter estrogen levels and increase the risk of insulin resistance and obesity.",
+      "Include": {
+        "Lifestyle": "Cardio exercise",
+        "Nutrients": "Low-fat, high-fiber diet"
+      }
+    },
+    "TC7FL2, hetero/homozygous": {
+      "Significance": "This gene is the strongest genetic indicator of type 2 diabetes.",
+      "Include": {
+        "Nutrition": "Higher protein intake, Omega-3s, dark coffee, and maintaining a healthy microbiome with fermented products.",
+        "Supplements": "Cordyceps and fish oil.",
+        "Avoid": "Sugar and refined carbohydrates."
+      }
+    }
+  },
+  "Immune System": {
+    "GPX1": {
+      "Significance": "Associated with Hashimoto’s",
+      "Include": {
+        "Lifestyle": ["Cold immersion post workout"],
+        "Supplements": ["Supplemental Selenium"]
+      },
+      "Avoid": [
+        "Selenium deficiency",
+        "Statin drugs",
+        "Iron deficiency",
+        "Excess heat exposure"
+      ]
+    },
+    "PPCDC": {
+      "Significance": "Reduced immune function",
+      "Include": {
+        "Supplements": ["Zinc"]
+      }
+    },
+    "SELENBP1": {
+      "Significance": "Associated with low immunity",
+      "Include": {
+        "Supplements": ["Copper supplement"]
+      }
+    }
+  },
+  "Diet": {
+    "PPAR Alpha, homo/heterozygous": {
+      "Significance": "Inability to go into ketosis",
+      "Include": {
+        "Lifestyle": [
+          "Lower fasting times",
+          "Consistent intake of foods that stimulate the PPAR-alpha gene",
+          "3 meals and snacks throughout the day",
+          "Decreasing saturated fat and increasing polyunsaturated fats"
+        ],
+        "Nutrients": [
+          "Astaxanthin",
+          "Pterostilbene",
+          "Genistein",
+          "Tomatoes",
+          "Cinnamon"
+        ],
+        "Supplements": ["Zinc", "Lion’s Mane"]
+      }
     }
   }
 }
