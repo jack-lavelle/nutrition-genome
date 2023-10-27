@@ -18,7 +18,9 @@ def download_patients() -> list:
     # TODO: could not connect to the server
     json_key = {"key": "dyqIDK3amOB09U4PSmSDW5FaZiFMNyoCTlmQESTBzh8="}
     response = requests.get(
-        "http://127.0.0.1:5000/read", json=json.dumps(json_key), timeout=30
+        "https://genomenutrition.pythonanywhere.com/read",
+        json=json.dumps(json_key),
+        timeout=30,
     )
     json_patient_data = json.loads(response.json()["data"])
     json_patient_data.pop("key")
@@ -44,7 +46,7 @@ def upload_patients(patients: list) -> Response:
 
     # TODO: handle this failing
     return requests.post(
-        "http://127.0.0.1:5000/save",
+        "https://genomenutrition.pythonanywhere.com/save",
         json=json.dumps(data, cls=MyEncoder),
         timeout=30,
     )

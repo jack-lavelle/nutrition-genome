@@ -318,7 +318,7 @@ def view_patient_window(window: Window, patient: Patient, report_created: bool):
     entry.pack()
 
     if report_created:
-        message = "New patient report successfully generated at PATH."
+        message = "New patient report successfully generated."
         label = tk.Label(second_window.window, text=message, fg="green")
         label.pack()
 
