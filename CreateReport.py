@@ -24,7 +24,16 @@ selected_styles = {
 }
 
 
-def create_pdf(patient: Patient):
+def create_section_based_pdf(patient: Patient) -> None:
+    """The original `create_pdf` method. This constructs a report by filling the content through
+    patient gene iteration, grouping the advice from each gene in the category it belongs.
+
+    Args:
+        patient (Patient): the Patient whose information will be displayed on the report.
+
+    Returns:
+        None: This creates the pdf in place.
+    """
     # Create a new PDF file
     output_pdf = patient.name + ".pdf"
     doc = SimpleDocTemplate(output_pdf, pagesize=letter)
@@ -35,7 +44,7 @@ def create_pdf(patient: Patient):
     content.append(Paragraph(patient.name, styles["SectionTitle"]))
 
     for section_title in list(Utilities.get_gene_master_data().keys()):
-        add_section(content, Section(section_title, genes=None))
+        add_section(content, Section(section_title, genes=patient.genes[section_title]))
 
     # Add the image at the top-center of the first page
     image_path = "owm_resources/logo.png"  # Replace with the path to your PNG file
@@ -173,5 +182,5 @@ def get_lorem_ipsum():
 
 
 if __name__ == "__main__":
-    create_pdf(Patient("Jack LaVelle"))
+    create_section_based_pdf(Patient("Jack LaVelle"))
     # create_bullet_pdf()

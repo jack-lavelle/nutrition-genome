@@ -4,7 +4,7 @@ from tkinter import ttk, Widget
 from functools import partial
 from Window import Window
 from Patient import Patient
-from CreateReport import create_pdf
+from CreateReport import create_section_based_pdf
 import Utilities
 
 
@@ -356,7 +356,7 @@ def view_patient_window(window: Window, patient: Patient, report_created: bool):
 
 
 def handle_create_pdf(window: Window, patient: Patient):
-    create_pdf(patient)
+    create_section_based_pdf(patient)
     view_patient_window(window, patient, True)
 
 
