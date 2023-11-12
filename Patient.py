@@ -13,8 +13,7 @@ class Patient:
     """
 
     name = None
-    reportsDict = {}
-    genes = {}
+    category_genes_dict = {}
     objectives = {}
 
     def __init__(
@@ -22,7 +21,8 @@ class Patient:
     ) -> None:
         self.name = name
         self.objectives = objectives
-        self.genes = genes
+        self.category_genes_dict = genes
 
-    def add_report(self, date):
+    def create_report(self):
+        # https://github.com/python-openxml/python-docx
         pass

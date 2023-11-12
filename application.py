@@ -236,7 +236,7 @@ def add_patient_action(
         patient.objectives = objectives
 
     for gene_section in selected_genes_dict:
-        patient.genes[gene_section] = selected_genes_dict[gene_section]
+        patient.category_genes_dict[gene_section] = selected_genes_dict[gene_section]
 
     gene_selection_driver(patient, window, iteration_index + 1)
 

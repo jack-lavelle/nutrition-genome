@@ -12,12 +12,12 @@ class Tests(unittest.TestCase):
     def test_patient_initialization(self):
         patient = Patient("George Washington")
 
-        self.assertIsNotNone(patient.genes)
+        self.assertIsNotNone(patient.category_genes_dict)
 
     def test_patient_genes(self):
         patient = Patient("Donald Fagen")
 
-        self.assertEqual(type(patient.genes), dict)
+        self.assertEqual(type(patient.category_genes_dict), dict)
 
 
 if __name__ == "__main__":

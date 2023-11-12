@@ -92,16 +92,30 @@ def generate_section_genes(section_title: str) -> list:
     return genes_random_sample
 
 
+@staticmethod
+def get_gene_master_data() -> dict:
+    if not Utilities.gene_master_data:
+        load_master_data()
+
+    return Utilities.gene_master_data
+
+
+@staticmethod
+def get_gene_info(gene: str) -> dict:
+    gene_info = {}
+    gene_master_data = get_gene_master_data()
+
+    # Find gene category.
+    for section in gene_master_data:
+        if gene in gene_master_data[section]:
+            gene_info["Category"] = section
+            return gene_info | gene_master_data[section][gene]
+
+
 class Utilities:
+    # Almost certain this class should be removed at some point.
     all_genes = []
     gene_master_data = {}
-
-    @staticmethod
-    def get_gene_master_data() -> dict:
-        if not Utilities.gene_master_data:
-            load_master_data()
-
-        return Utilities.gene_master_data
 
     @staticmethod
     def gen_section_title() -> str:
@@ -112,11 +126,11 @@ class Utilities:
         if not all_genes:
             all_genes = [
                 list(
-                    Utilities.get_gene_master_data()[
-                        list(Utilities.get_gene_master_data().keys())[i]
+                    get_gene_master_data()[
+                        list(get_gene_master_data().keys())[i]
                     ].keys()
                 )
-                for i in range(0, len(Utilities.get_gene_master_data().keys()))
+                for i in range(0, len(get_gene_master_data().keys()))
             ]
 
         return all_genes
