@@ -9,9 +9,10 @@ from reportlab.platypus import (
 )
 from Section import Section
 from Patient import Patient
-from Utilities import Utilities
+from Utilities import Utilities, get_gene_master_data
 from reportlab.lib.colors import CMYKColor
 
+# This is to be deprecated in favor of `Report.py` and `ReportCreation.py`
 
 styles = getSampleStyleSheet()
 styles["Title"].alignment = 0
@@ -34,7 +35,7 @@ def create_section_based_pdf(patient: Patient) -> None:
     Returns:
         None: This creates the pdf in place.
     """
-    # Create a new PDF file
+
     output_pdf = patient.name + ".pdf"
     doc = SimpleDocTemplate(output_pdf, pagesize=letter)
 
@@ -43,8 +44,11 @@ def create_section_based_pdf(patient: Patient) -> None:
     content.append(Paragraph("Nutrition Genome", styles["Title"]))
     content.append(Paragraph(patient.name, styles["SectionTitle"]))
 
-    for section_title in list(Utilities.get_gene_master_data().keys()):
-        add_section(content, Section(section_title, genes=patient.genes[section_title]))
+    for section_title in list(get_gene_master_data().keys()):
+        add_section(
+            content,
+            Section(section_title, genes=patient.category_genes_dict[section_title]),
+        )
 
     # Add the image at the top-center of the first page
     image_path = "owm_resources/logo.png"  # Replace with the path to your PNG file
