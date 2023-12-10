@@ -1,7 +1,7 @@
 import json
 from Window import Window
 import tkinter as tk
-from functools import partial
+from CreateToolTip import CreateToolTip
 
 from Utilities import get_gene_info
 from Gene import Gene
@@ -99,7 +99,7 @@ class ReportGeneSelectionWindow(Window):
                 anchor="w",
             )
             gene_label.bind(
-                "<Enter>", lambda bind_enter, label=gene_label: label.config(fg="blue")
+                "<Enter>", lambda bind_enter, label=gene_label: label.config(fg="green")
             )
             gene_label.bind(
                 "<Leave>", lambda bind_leave, label=gene_label: label.config(fg="black")
@@ -109,6 +109,10 @@ class ReportGeneSelectionWindow(Window):
                 lambda get_info, gene_name=gene_name: self.test_func(gene_name),
             )
             gene_label.place(x=x0 + 35, y=y0 + (count + 2) * 20)
+            CreateToolTip(
+                gene_label,
+                f"Click here to retrieve the information for gene: {gene_name}",
+            )
 
     def create_manual_selection_list_widget(self, objective: str) -> set[Gene]:
         # manual gene selection
