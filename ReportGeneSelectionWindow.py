@@ -18,11 +18,14 @@ class ReportGeneSelectionWindow(Window):
                 "objective2" : ("Gene1", "Gene2"),
                 "objective3" : ("Gene1", "Gene2")
             }
+
+    TODO: update this doc
     """
 
     selected_genes_category: dict[str, list[Gene]] = {}
     INITIAL_OBJECTIVE_X_Y = (25, 15)
     SUGGESTED_ROW_COLUMN = (1, 1)
+    SUGGESTED_FINAL_HEIGHT = 0
 
     def __init__(self, objectives, root) -> None:
         super().__init__("Report Gene Selection", None, None)
@@ -40,7 +43,9 @@ class ReportGeneSelectionWindow(Window):
         """
         tk.Label(self.window, text=objective, fg="black").place(x=x0, y=y0)
         self.create_automatic_selection_list_widget(objective, x0 + 20, y0 + 20)
-        self.create_manual_selection_list_widget(objective)
+        self.create_manual_selection_list_widget(
+            objective, x0 + 20, self.SUGGESTED_FINAL_HEIGHT
+        )
 
     # Join these methods
     def create_automatic_selection_list_widget(
@@ -82,9 +87,11 @@ class ReportGeneSelectionWindow(Window):
         )
         tk.Label(
             self.window,
-            text=f"Gene Name, Percent Relevancy",
+            text="Gene Name, Percent Relevancy",
             anchor="w",
-        ).place(x=x0 + 35, y=y0 + 20)
+        ).place(
+            x=x0 + 35, y=y0 + 20
+        )  # fix this "manually adding to previous positions" business
         selected_genes = {}
         for count, gene_name in enumerate(genes):
             if gene_name not in selected_genes:
@@ -108,15 +115,37 @@ class ReportGeneSelectionWindow(Window):
                 "<Button-1>",
                 lambda get_info, gene_name=gene_name: self.test_func(gene_name),
             )
-            gene_label.place(x=x0 + 35, y=y0 + (count + 2) * 20)
+            final_y = y0 + (count + 2) * 20
+            gene_label.place(x=x0 + 35, y=final_y)
             CreateToolTip(
                 gene_label,
                 f"Click here to retrieve the information for gene: {gene_name}",
             )
+        self.SUGGESTED_FINAL_HEIGHT = final_y
 
-    def create_manual_selection_list_widget(self, objective: str) -> set[Gene]:
-        # manual gene selection
-        pass
+    def create_manual_selection_list_widget(
+        self, objective: str, x0: int, y0: int
+    ) -> set[Gene]:
+        tk.Label(self.window, text="Manually Selected Genes", fg="black").place(
+            x=x0, y=y0 + 20
+        )
+        search_bar = tk.Entry(self.window)
+        search_value = tk.StringVar(search_bar, "Search for gene")
+        search_bar.bind(
+            "<Button-1>",
+            lambda bind_button1, search_bar=search_bar, search_value=search_value: handle_search_bar_setting(
+                search_bar, search_value, "click"
+            ),
+        )
+        search_bar.bind(
+            "<Leave>",
+            lambda bind_leave, search_bar=search_bar, search_value=search_value: handle_search_bar_setting(
+                search_bar, search_value, "leave"
+            ),
+        )
+        search_bar.place(x=x0 + 20, y=y0 + 40)
+        search_string = tk.StringVar(search_bar, "Search for gene")
+        search_bar.config(textvariable=search_string)
 
     def test_func(self, gene_name: str):
         gene_data_window = Window(f"{gene_name}" + " Information", root=self.root)
@@ -126,3 +155,19 @@ class ReportGeneSelectionWindow(Window):
             wraplength=200,
         ).pack()
         gene_data_window.window.mainloop()
+
+
+def handle_search_bar_setting(
+    search_bar: tk.Entry, search_value: tk.StringVar, state: str
+) -> str:
+    """
+    Responsible for setting the proper value for the search bar.
+    """
+    if state == "click":
+        if search_bar.get() == "Search for gene":
+            search_value.set("")
+            search_bar.config(textvariable=search_value)
+    else:
+        if search_bar.get() == "":
+            search_value.set("Search for gene")
+            search_bar.config(textvariable=search_value)
