@@ -8,12 +8,15 @@ class Window:
     window = None
     properties = None
     patients = None
+    root = None
 
     def __init__(self, title, properties=None, root=None) -> None:
+        # root is a tk.Window()
         if root:
-            self.window = tk.Toplevel(root.window)
+            self.window = tk.Toplevel(root)
         else:
             self.window = tk.Tk()
+            self.root = self.window
 
         self.window.title(title)
         ico = Image.open(os.path.join("owm_resources", "logo_icon.png"))
@@ -30,6 +33,9 @@ class Window:
         self.window.geometry(
             f"{window_width}x{window_height}+{x_position}+{y_position}"
         )
+
+    def destroy(self):
+        self.window.destroy()
 
     def set_geometry(self, properties=None):
         self.properties = self.get_current_properties()
