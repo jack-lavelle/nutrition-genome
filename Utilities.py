@@ -101,6 +101,16 @@ def get_gene_master_data() -> dict:
 
 
 @staticmethod
+def get_gene_names() -> list:
+    """Returns a list of all gene names."""
+    genes = get_gene_master_data()
+    names = []
+    for gene_category in genes:
+        names += list(genes[gene_category].keys())
+    return names
+
+
+@staticmethod
 def get_gene_info(gene: str) -> dict:
     gene_info = {}
     gene_master_data = get_gene_master_data()

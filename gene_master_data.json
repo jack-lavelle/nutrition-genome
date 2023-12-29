@@ -155,7 +155,7 @@
     },
     "FADS2": {
       "Relevant Genotype(s)": ["hetero", "homozygous"],
-      "Significance": "Omega3 needed for cognition and mood",
+      "Significance": "Omega 3 needed for cognition and mood",
       "Include": {
         "Supplements": ["Animal based EPA and EHA"]
       }

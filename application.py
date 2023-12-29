@@ -2,6 +2,7 @@ import tkinter as tk
 import sys
 from tkinter import ttk, Widget
 from functools import partial
+from ReportGeneSelectionWindow import ReportGeneSelectionWindow
 from Window import Window
 from Patient import Patient
 from CreateReport import create_section_based_pdf
@@ -314,6 +315,7 @@ def view_patient_window(window: Window, patient: Patient, report_created: bool):
     window.window.destroy()
     second_window = Window("View Patient")
     entry = tk.Label(second_window.window, text=patient.name, fg="black")
+    # TODO: is this entry.config call needed?
     entry.config(fg="black")
     entry.pack()
 
@@ -358,6 +360,19 @@ def view_patient_window(window: Window, patient: Patient, report_created: bool):
 def handle_create_pdf(window: Window, patient: Patient):
     create_section_based_pdf(patient)
     view_patient_window(window, patient, True)
+
+
+def experimental_create_pdf(window: Window, patient: Patient):
+    if window:
+        window.destroy()
+
+    second_window = ReportGeneSelectionWindow()
+
+    # TODO: no need for window.window ... just have a helper function (Window.destroy()) that
+    # allows for window.destroy().
+
+    for objective in patient.objectives:
+        second_window.add_objective_section(objective)
 
 
 def handle_delete_patient(window: Window, patient: Patient):
