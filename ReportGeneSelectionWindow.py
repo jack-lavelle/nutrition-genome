@@ -1,9 +1,10 @@
 import json
 from Window import Window
 import tkinter as tk
+from tkinter import ttk
 from CreateToolTip import CreateToolTip
 
-from Utilities import get_gene_info
+from Utilities import get_gene_info, get_gene_names
 from Gene import Gene
 
 
@@ -26,6 +27,12 @@ class ReportGeneSelectionWindow(Window):
     INITIAL_OBJECTIVE_X_Y = (25, 15)
     SUGGESTED_ROW_COLUMN = (1, 1)
     SUGGESTED_FINAL_HEIGHT = 0
+    manually_selected_genes = {}
+    add_manual_gene_button = None
+    combo_box = None
+    submit_genes_button = None
+    automatic_selected_genes = {}
+    finalized_genes = []
 
     def __init__(self, objectives, root) -> None:
         super().__init__("Report Gene Selection", None, None)
@@ -92,14 +99,13 @@ class ReportGeneSelectionWindow(Window):
         ).place(
             x=x0 + 35, y=y0 + 20
         )  # fix this "manually adding to previous positions" business
-        selected_genes = {}
         for count, gene_name in enumerate(genes):
-            if gene_name not in selected_genes:
-                selected_genes[gene_name] = tk.BooleanVar()
+            if gene_name not in self.automatic_selected_genes:
+                self.automatic_selected_genes[gene_name] = tk.BooleanVar()
             gene_data = genes[gene_name]
-            tk.Checkbutton(self.window, variable=selected_genes[gene_name]).place(
-                x=x0 + 15, y=y0 + (count + 2) * 20
-            )
+            tk.Checkbutton(
+                self.window, variable=self.automatic_selected_genes[gene_name]
+            ).place(x=x0 + 15, y=y0 + (count + 2) * 20)
             gene_label = tk.Label(
                 self.window,
                 text=f"{gene_name}, {round(gene_data['Similarity'] * 100, 2)}",
@@ -126,26 +132,118 @@ class ReportGeneSelectionWindow(Window):
     def create_manual_selection_list_widget(
         self, objective: str, x0: int, y0: int
     ) -> set[Gene]:
-        tk.Label(self.window, text="Manually Selected Genes", fg="black").place(
-            x=x0, y=y0 + 20
+        section_label = tk.Label(
+            self.window, text="Manually Selected Genes", fg="black"
         )
-        search_bar = tk.Entry(self.window)
-        search_value = tk.StringVar(search_bar, "Search for gene")
-        search_bar.bind(
-            "<Button-1>",
-            lambda bind_button1, search_bar=search_bar, search_value=search_value: handle_search_bar_setting(
-                search_bar, search_value, "click"
-            ),
+        section_label.place(x=x0, y=y0 + 20)
+        gene_names = get_gene_names()
+
+        def check_input(event):
+            value = event.widget.get()
+
+            if value == "":
+                self.combo_box["values"] = gene_names
+            else:
+                data = []
+                for item in gene_names:
+                    if value.lower() in item.lower():
+                        data.append(item)
+
+                self.combo_box["values"] = data
+
+        self.combo_box = ttk.Combobox(self.window)
+        self.combo_box["values"] = gene_names
+        self.combo_box.bind("<KeyRelease>", check_input)
+        self.combo_box.place(x=x0 + 20, y=y0 + 40)
+
+        def on_submit():
+            value = self.combo_box.get()
+            print(value)
+            self.add_manual_gene_button.destroy()
+            self.combo_box.destroy()
+            self.submit_genes_button.destroy()
+
+            new_label = tk.Label(
+                self.window,
+                text=value,
+                anchor="w",
+            )
+            new_label.bind(
+                "<Enter>", lambda bind_enter, label=new_label: label.config(fg="green")
+            )
+            new_label.bind(
+                "<Leave>", lambda bind_leave, label=new_label: label.config(fg="black")
+            )
+            new_label.bind(
+                "<Button-1>",
+                lambda get_info, gene_name=value: self.test_func(gene_name),
+            )
+            for gene_name, label in self.manually_selected_genes.items():
+                label.destroy()
+                label = tk.Label(
+                    self.window,
+                    text=gene_name,
+                    anchor="w",
+                )
+                label.bind(
+                    "<Enter>", lambda bind_enter, label=label: label.config(fg="green")
+                )
+                label.bind(
+                    "<Leave>", lambda bind_leave, label=label: label.config(fg="black")
+                )
+                label.bind(
+                    "<Button-1>",
+                    lambda get_info, anon_gene_name=gene_name: self.test_func(
+                        anon_gene_name
+                    ),
+                )
+                label.place(
+                    x=x0 + 20, y=y0 + 20 * (len(self.manually_selected_genes) + 1)
+                )
+                CreateToolTip(
+                    new_label,
+                    f"Click here to retrieve the information for gene: {gene_name}",
+                )
+
+            self.manually_selected_genes[value] = new_label
+            new_label.place(
+                x=x0 + 20, y=y0 + 20 * (len(self.manually_selected_genes) + 1)
+            )
+            CreateToolTip(
+                new_label,
+                f"Click here to retrieve the information for gene: {value}",
+            )
+
+            self.combo_box = ttk.Combobox(self.window)
+            self.combo_box["values"] = gene_names
+            self.combo_box.bind("<KeyRelease>", check_input)
+            self.combo_box.place(
+                x=x0 + 20, y=y0 + 20 * (len(self.manually_selected_genes) + 2)
+            )
+
+            self.add_manual_gene_button = tk.Button(
+                self.window, text="Select Gene", command=on_submit
+            )
+            self.add_manual_gene_button.place(
+                x=x0 + 170, y=y0 + 20 * (len(self.manually_selected_genes) + 2) - 3
+            )
+
+            self.submit_genes_button = tk.Button(
+                self.window, text="Finalize Gene Selection", command=self.finalize_genes
+            )
+            self.submit_genes_button.place(
+                x=x0 + 20, y=y0 + 10 + 20 * (len(self.manually_selected_genes) + 3)
+            )
+
+        self.add_manual_gene_button = tk.Button(
+            self.window, text="Select Gene", command=on_submit
         )
-        search_bar.bind(
-            "<Leave>",
-            lambda bind_leave, search_bar=search_bar, search_value=search_value: handle_search_bar_setting(
-                search_bar, search_value, "leave"
-            ),
+        self.add_manual_gene_button.place(x=x0 + 170, y=y0 + 37)
+
+        self.submit_genes_button = tk.Button(
+            self.window, text="Finalize Gene Selection", command=self.finalize_genes
         )
-        search_bar.place(x=x0 + 20, y=y0 + 40)
-        search_string = tk.StringVar(search_bar, "Search for gene")
-        search_bar.config(textvariable=search_string)
+        self.submit_genes_button.place(x=x0 + 20, y=y0 + 70)
 
     def test_func(self, gene_name: str):
         gene_data_window = Window(f"{gene_name}" + " Information", root=self.root)
@@ -155,6 +253,16 @@ class ReportGeneSelectionWindow(Window):
             wraplength=200,
         ).pack()
         gene_data_window.window.mainloop()
+
+    def finalize_genes(self):
+        res = []
+        for gene in self.automatic_selected_genes:
+            if self.automatic_selected_genes[gene].get():
+                res.append(gene)
+
+        for gene in self.manually_selected_genes.keys():
+            res.append(gene)
+        self.finalized_genes = res
 
 
 def handle_search_bar_setting(
