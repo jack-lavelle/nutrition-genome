@@ -1,3 +1,9 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from Patient import Patient
+
 import json
 from Window import Window
 import tkinter as tk
@@ -23,75 +29,78 @@ class ReportGeneSelectionWindow(Window):
     TODO: update this doc
     """
 
-    selected_genes_category: dict[str, list[Gene]] = {}
-    INITIAL_OBJECTIVE_X_Y = (25, 15)
-    SUGGESTED_ROW_COLUMN = (1, 1)
-    SUGGESTED_FINAL_HEIGHT = 0
-    manually_selected_genes = {}
-    add_manual_gene_button = None
-    combo_box = None
-    submit_genes_button = None
-    automatic_selected_genes = {}
-    finalized_genes = []
-
-    def __init__(self, objectives, root) -> None:
-        super().__init__("Report Gene Selection", None, None)
-        self.objectives = objectives
+    def __init__(self, patient: Patient, automatic_gene_dict_entry: dict) -> None:
+        super().__init__("Report Gene Selection")
+        self.INITIAL_OBJECTIVE_X_Y = (25, 15)
+        self.SUGGESTED_ROW_COLUMN = (1, 1)
+        self.SUGGESTED_FINAL_HEIGHT = 0
+        self.selected_genes_category: dict[str, list[Gene]] = {}
+        self.manually_selected_genes = {}
+        self.add_manual_gene_button = None
+        self.combo_box = None
+        self.submit_genes_button = None
+        self.automatic_selected_genes = {}
+        self.finalized_genes = []
         x, y = self.INITIAL_OBJECTIVE_X_Y
-        # TODO: right now we want only one gene to be added.
-        # for objective in objectives:
-        #    self.add_objective_section(objective)
-        self.add_objective_section("Objective 1: Improve sleep.", x, y)
 
-    def add_objective_section(self, objective: str, x0: int, y0: int):
+        self.add_objective_section(patient, automatic_gene_dict_entry, x, y)
+        self.window.mainloop()
+
+    def add_objective_section(
+        self, patient: Patient, automatic_gene_dict_entry: dict, x0: int, y0: int
+    ):
         """This is called from application.py and adds a gene selection section corresponding to a
         single objective with both automatic and manual selection types (automatic corresponding to
         genes chosen from natural language processing).
         """
-        tk.Label(self.window, text=objective, fg="black").place(x=x0, y=y0)
-        self.create_automatic_selection_list_widget(objective, x0 + 20, y0 + 20)
+        tk.Label(
+            self.window,
+            text=automatic_gene_dict_entry[0],
+            fg="black",
+        ).place(x=x0, y=y0)
+        self.create_automatic_selection_list_widget(
+            automatic_gene_dict_entry[1], x0 + 20, y0 + 20
+        )
         self.create_manual_selection_list_widget(
-            objective, x0 + 20, self.SUGGESTED_FINAL_HEIGHT
+            patient.genes, x0 + 20, self.SUGGESTED_FINAL_HEIGHT
         )
 
     # Join these methods
     def create_automatic_selection_list_widget(
-        self, objective: str, x0: int, y0: int
+        self, genes, x0: int, y0: int
     ) -> dict[str, bool]:
-        # genes = get_similarity_dict(objective)
-
         # sample dict output from get_similarity_dict using objective: "Improve sleep"
         tk.Label(self.window, text="Suggested Relevant Genes", fg="black").place(
             x=x0, y=y0
         )
-        genes = dict(
-            [
-                (
-                    "FUT2",
-                    {
-                        "Similarity": 0.6205169558525085,
-                        "Significance": "Lower Gaba production: sleep / calm hormone",
-                        "Category": "Mood / Memory",
-                    },
-                ),
-                (
-                    "GAD1",
-                    {
-                        "Similarity": 0.6171880960464478,
-                        "Significance": "Lower GABA-sleep/calm hormone",
-                        "Category": "Mood / Memory",
-                    },
-                ),
-                (
-                    "MTHFR 1298",
-                    {
-                        "Similarity": 0.6098900437355042,
-                        "Significance": "Higher need for folate for healthier Nitric Oxide production( inflammation reduction, blood pressure control, brain function, and cancer protection)",
-                        "Category": "General Inflammation",
-                    },
-                ),
-            ]
-        )
+        # genes = dict(
+        #     [
+        #         (
+        #             "FUT2",
+        #             {
+        #                 "Similarity": 0.6205169558525085,
+        #                 "Significance": "Lower Gaba production: sleep / calm hormone",
+        #                 "Category": "Mood / Memory",
+        #             },
+        #         ),
+        #         (
+        #             "GAD1",
+        #             {
+        #                 "Similarity": 0.6171880960464478,
+        #                 "Significance": "Lower GABA-sleep/calm hormone",
+        #                 "Category": "Mood / Memory",
+        #             },
+        #         ),
+        #         (
+        #             "MTHFR 1298",
+        #             {
+        #                 "Similarity": 0.6098900437355042,
+        #                 "Significance": "Higher need for folate for healthier Nitric Oxide production( inflammation reduction, blood pressure control, brain function, and cancer protection)",
+        #                 "Category": "General Inflammation",
+        #             },
+        #         ),
+        #     ]
+        # )
         tk.Label(
             self.window,
             text="Gene Name, Percent Relevancy",
@@ -130,13 +139,13 @@ class ReportGeneSelectionWindow(Window):
         self.SUGGESTED_FINAL_HEIGHT = final_y
 
     def create_manual_selection_list_widget(
-        self, objective: str, x0: int, y0: int
+        self, gene_names: list[str], x0: int, y0: int
     ) -> set[Gene]:
+        # Refactor
         section_label = tk.Label(
             self.window, text="Manually Selected Genes", fg="black"
         )
         section_label.place(x=x0, y=y0 + 20)
-        gene_names = get_gene_names()
 
         def check_input(event):
             value = event.widget.get()
@@ -158,7 +167,6 @@ class ReportGeneSelectionWindow(Window):
 
         def on_submit():
             value = self.combo_box.get()
-            print(value)
             self.add_manual_gene_button.destroy()
             self.combo_box.destroy()
             self.submit_genes_button.destroy()
@@ -178,40 +186,14 @@ class ReportGeneSelectionWindow(Window):
                 "<Button-1>",
                 lambda get_info, gene_name=value: self.test_func(gene_name),
             )
-            for gene_name, label in self.manually_selected_genes.items():
-                label.destroy()
-                label = tk.Label(
-                    self.window,
-                    text=gene_name,
-                    anchor="w",
-                )
-                label.bind(
-                    "<Enter>", lambda bind_enter, label=label: label.config(fg="green")
-                )
-                label.bind(
-                    "<Leave>", lambda bind_leave, label=label: label.config(fg="black")
-                )
-                label.bind(
-                    "<Button-1>",
-                    lambda get_info, anon_gene_name=gene_name: self.test_func(
-                        anon_gene_name
-                    ),
-                )
-                label.place(
-                    x=x0 + 20, y=y0 + 20 * (len(self.manually_selected_genes) + 1)
-                )
-                CreateToolTip(
-                    new_label,
-                    f"Click here to retrieve the information for gene: {gene_name}",
-                )
 
             self.manually_selected_genes[value] = new_label
-            new_label.place(
-                x=x0 + 20, y=y0 + 20 * (len(self.manually_selected_genes) + 1)
-            )
             CreateToolTip(
                 new_label,
                 f"Click here to retrieve the information for gene: {value}",
+            )
+            new_label.place(
+                x=x0 + 20, y=y0 + 20 * (len(self.manually_selected_genes) + 1)
             )
 
             self.combo_box = ttk.Combobox(self.window)
@@ -262,7 +244,11 @@ class ReportGeneSelectionWindow(Window):
 
         for gene in self.manually_selected_genes.keys():
             res.append(gene)
-        self.finalized_genes = res
+        self.finalized_genes = set(res)
+        self.window.destroy()
+
+    def get_finalized_genes(self):
+        return self.finalized_genes
 
 
 def handle_search_bar_setting(

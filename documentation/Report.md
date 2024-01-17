@@ -23,3 +23,10 @@ Objective 2
 		(gene)
 ....
 ```
+
+A typical use case of the report is as follows:
+
+```
+report = patient.create_report()
+report.generate_pdf()
+```

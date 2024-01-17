@@ -18,6 +18,7 @@ class CreateToolTip(object):
         self.widget.bind("<ButtonPress>", self.leave)
         self.id = None
         self.tw = None
+        self.label = None
 
     def enter(self, event=None):
         self.widget.config(fg="green")
@@ -48,7 +49,7 @@ class CreateToolTip(object):
         # Leaves only the label and removes the app window
         self.tw.wm_overrideredirect(True)
         self.tw.wm_geometry("+%d+%d" % (x, y))
-        label = tk.Label(
+        self.label = tk.Label(
             self.tw,
             text=self.text,
             justify="left",
@@ -57,7 +58,11 @@ class CreateToolTip(object):
             borderwidth=1,
             wraplength=self.wraplength,
         )
-        label.pack(ipadx=1)
+        self.label.pack(ipadx=1)
+
+    def destroy(self):
+        if self.label:
+            self.label.destroy()
 
     def hidetip(self):
         tw = self.tw
